@@ -113,13 +113,9 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trainer_app',
-        'HOST': '127.0.0.1',
-        'PASSWORD': 'coderslab',
-        'USER': 'postgres',
-        'PORT': 5432
-    }
-}
+try:
+    from trainerconnect.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
+    exit(0)
