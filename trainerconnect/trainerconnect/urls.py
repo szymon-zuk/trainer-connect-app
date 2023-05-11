@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from trainerapp.views import MainPage
+from trainerapp.views import MainPage, AddExerciseView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", MainPage.as_view(), name="main-page"),
+    path("add_exercise/", AddExerciseView.as_view(), name="add-exercise"),
 ]
