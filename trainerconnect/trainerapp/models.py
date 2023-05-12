@@ -57,9 +57,9 @@ class ExerciseTraining(models.Model):
     :model:`trainer_app.exercise`.
     """
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
-    training_id = models.ForeignKey(Training, on_delete=models.CASCADE)
-    exercise_id = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    day_name = models.ForeignKey(DayName, on_delete=models.CASCADE)
+    training_id = models.ForeignKey(Training)
+    exercise_id = models.ForeignKey(Exercise)
+    day_name = models.ForeignKey(DayName)
 
 
 class TrainingPlan(models.Model):
@@ -69,5 +69,5 @@ class TrainingPlan(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
-    trainings = models.ForeignKey(Training, on_delete=models.CASCADE)
+    trainings = models.ForeignKey(Training)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
