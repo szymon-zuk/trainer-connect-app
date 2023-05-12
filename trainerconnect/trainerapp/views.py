@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from .models import Exercise
 
 
@@ -18,3 +18,7 @@ class AddExerciseView(CreateView):
 
     def get_success_message(self, cleaned_data):
         return f"Dodano ćwiczenie {cleaned_data['name']}"
+    
+class ExerciseListView(ListView):
+    model = Exercise
+    paginate_by = 30
