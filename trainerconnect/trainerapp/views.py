@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView
 from .models import Exercise, Training
+from .forms import ExerciseForm, TrainingForm
 
 
 class MainPage(View):
@@ -16,6 +17,7 @@ class AddExerciseView(CreateView):
     model = Exercise
     success_url = reverse_lazy('main-page')
     fields = '__all__'
+    form_class = ExerciseForm
     success_message = 'Dodano ćwiczenie!'
 
     def get_success_message(self, cleaned_data):
@@ -28,9 +30,11 @@ class ExerciseListView(ListView):
 
 
 class AddTrainingView(CreateView):
+    """Implements a form that adds a training to database"""
     model = Training
     success_url = reverse_lazy("main-page")
     fields = "__all__"
+    form_class = TrainingForm
     success_message = 'Dodano trening!'
 
     def get_success_message(self, cleaned_data):

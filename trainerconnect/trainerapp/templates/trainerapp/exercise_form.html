@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h3>Dodaj ćwiczenie</h3>
+    <h3>Dodaj ćwiczenie:</h3>
     <form action="{% url 'add-exercise' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
