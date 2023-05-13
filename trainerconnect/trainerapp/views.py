@@ -38,3 +38,8 @@ class AddTrainingView(CreateView):
 
     def get_success_message(self, cleaned_data):
         return f"Dodano trening {cleaned_data['name']}"
+
+
+class TrainingListView(ListView):
+    model = Training
+    paginate_by = 30

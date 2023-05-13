@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from trainerapp.views import MainPage, AddExerciseView, ExerciseListView, AddTrainingView
+from trainerapp.views import MainPage, AddExerciseView, ExerciseListView, AddTrainingView, TrainingListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path("add_exercise/", AddExerciseView.as_view(), name="add-exercise"),
     path("exercise_list/", ExerciseListView.as_view(), name="exercise-list"),
     path("add_training/", AddTrainingView.as_view(), name="add-training"),
+    path("training_list/", TrainingListView.as_view(), name="training-list"),
 ]
