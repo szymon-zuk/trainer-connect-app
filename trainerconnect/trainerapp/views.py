@@ -16,13 +16,13 @@ class AddExerciseView(CreateView):
     """Implements a form that adds an exercise to database"""
     model = Exercise
     success_url = reverse_lazy('main-page')
-    fields = '__all__'
     form_class = ExerciseForm
     success_message = 'Dodano ćwiczenie!'
 
     def get_success_message(self, cleaned_data):
         return f"Dodano ćwiczenie {cleaned_data['name']}"
-    
+
+
 class ExerciseListView(ListView):
     """Shows a list of all exercises"""
     model = Exercise
@@ -33,7 +33,6 @@ class AddTrainingView(CreateView):
     """Implements a form that adds a training to database"""
     model = Training
     success_url = reverse_lazy("main-page")
-    fields = "__all__"
     form_class = TrainingForm
     success_message = 'Dodano trening!'
 
