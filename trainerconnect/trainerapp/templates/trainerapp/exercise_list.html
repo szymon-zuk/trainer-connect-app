@@ -2,8 +2,8 @@
 {% block content %}
     <h2>Lista ćwiczeń:</h2>
     <a href="/add_exercise/">
-        <button>Dodaj ćwiczenie</button>
-    </a>
+        <button type="button" class="btn btn-primary">Dodaj ćwiczenie</button>
+    </a><br><br>
     <ul>
     {% for object in object_list %}
         <li>Nazwa: {{ object.name }}</li>

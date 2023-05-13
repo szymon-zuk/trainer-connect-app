@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Strona główna</a>
+          <a class="nav-link active" aria-current="page" href="/">Strona główna</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
@@ -41,12 +41,19 @@
                   <span>Terminarz</span>
               </a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">
-                  <span>Plany treningowe</span>
-                  <i class="fas fa-angle-down"></i>
-              </a>
-          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        Plany treningowe</a>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/add_training/">Dodaj ćwiczenie</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/exercise_list/">Lista ćwiczeń</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/add_training/">Dodaj trening</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/training_list/">Lista treningów</a>
+    </div>
+  </li>
           <li class="nav-item">
               <a class="nav-link" href="#">Płatności</a>
           </li>
@@ -60,7 +67,7 @@
     </div>
   </div>
 </nav>
-
+Witamy w aplikacji TrainerConnect!
 <!-- //--------------------------- page content -------------------------// -->
 {% block content %}{% endblock content %}
 <!-- //--------------------------- page content end ---------------------// -->
@@ -75,4 +82,6 @@
         crossorigin="anonymous"></script>
 
 </body>
+
+
 </html>
