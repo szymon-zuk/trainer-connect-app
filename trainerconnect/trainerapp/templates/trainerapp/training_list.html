@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Lista ćwiczeń:</h2>
+    <a href="/add_exercise/">
+        <button>Dodaj ćwiczenie</button>
+    </a>
+    <ul>
+    {% for object in object_list %}
+        <li>Nazwa: {{ object.name }}</li>
+        <li>Opis: {{ object.description }} </li>
+        <li>Dzień tygodnia: {{ object.day_name }} </li>
+        <li>Ćwiczenia: {{ object.exercises.name }} </li><br>
+    {% endfor %}
+    </ul>
+{% endblock %}
