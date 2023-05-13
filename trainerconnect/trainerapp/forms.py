@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django import forms
 
 # rozważyć użycie django-crispy-forms do stylowania formularzy
+# from django.utils.translation import gettext as _
 
 
 class ExerciseForm(forms.ModelForm):
@@ -24,4 +25,4 @@ class TrainingForm(forms.ModelForm):
 
     class Meta:
         model = Training
-        fields = ['name', 'description', 'exercises']
+        fields = ['name', 'description', "day_name", 'exercises']

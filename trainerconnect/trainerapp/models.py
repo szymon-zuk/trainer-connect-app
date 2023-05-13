@@ -29,27 +29,17 @@ class Training(models.Model):
     """
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
+    days = (
+        ("Pn", "Poniedziałek"),
+        ("Wt", "Wtorek"),
+        ("Śr", "Środa"),
+        ("Czw", "Czwartek"),
+        ("Pt", "Piątek"),
+         ("Sob", "Sobota"),
+          ("Ndz", "Niedziela"),
+    )
+    day_name = models.CharField(default="Pn", choices=days)
     exercises = models.ManyToManyField(Exercise, through="ExerciseTraining")
-
-
-class DayName(models.Model):
-    """
-    Represents the name of a day of the week. Is used in ExerciseTraining
-    to show which day does the training happen.
-    """
-
-    Days = (
-        "Poniedziałek",
-        "Wtorek",
-        "Środa",
-        "Czwartek",
-        "Piątek",
-        "Sobota",
-        "Niedziela",
-    )
-    name = models.CharField(
-        choices=list(enumerate(Days, start=1)), max_length=32, default=1
-    )
 
 
 class ExerciseTraining(models.Model):
@@ -59,7 +49,6 @@ class ExerciseTraining(models.Model):
     """
     training_id = models.ForeignKey(Training, on_delete=models.CASCADE)
     exercise_id = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    day_name = models.ForeignKey(DayName, on_delete=models.CASCADE)
 
 
 class TrainingPlan(models.Model):
