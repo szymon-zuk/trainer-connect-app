@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="https://greekreporter.com/wp-content/uploads/2023/01/kyriakos-grizzly-credit-kyriakos-kapakoulak-youtube.jpg" class="d-block w-100" alt="..." width="50" height="700">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://i.dailymail.co.uk/1s/2019/02/01/10/9266918-6656903-image-a-11_1549016834213.jpg" class="d-block w-100" alt="..." width="50" height="700">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://cdn.shopify.com/s/files/1/1633/7705/files/world_biggest_bodybuilder_480x480.jpg?v=1664967379" class="d-block w-100" alt="..." width="50" height="700">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock %}

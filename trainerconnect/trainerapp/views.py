@@ -9,7 +9,7 @@ from .forms import ExerciseForm, TrainingForm
 class MainPage(View):
     """ View of the default page"""
     def get(self, request):
-        return render(request, "base.html")
+        return render(request, "main_page.html")
 
 
 class AddExerciseView(CreateView):
