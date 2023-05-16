@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Lista planów treningowych:</h2>
+    <a href="/add_training/">
+        <button type="button" class="btn btn-primary">Dodaj trening</button>
+    </a><br><br>
+    <ul>
+    {% for object in object_list %}
+        <li>Nazwa: {{ object.name }}</li>
+        <li>Opis: {{ object.description }} </li>
+        <li>Treningi: {{ object.trainings }} </li>
+        <li>Użytkownik: {{ object.user_id }}</li><br>
+    {% endfor %}
+    </ul>
+{% endblock %}

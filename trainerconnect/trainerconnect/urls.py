@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from trainerapp.views import MainPage, AddExerciseView, ExerciseListView, AddTrainingView, TrainingListView
+from trainerapp.views import MainPage, AddExerciseView, ExerciseListView, AddTrainingView, TrainingListView, AddTrainingPlanView, TrainingPlanListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,4 +26,6 @@ urlpatterns = [
     path("add_training/", AddTrainingView.as_view(), name="add-training"),
     path("training_list/", TrainingListView.as_view(), name="training-list"),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('add_training_plan/', AddTrainingPlanView.as_view(), name="add-training-plan"),
+    path('training_plan_list/', TrainingPlanListView.as_view(), name="training-plan-list"),
 ]

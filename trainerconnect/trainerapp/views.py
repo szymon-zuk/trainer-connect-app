@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView
-from .models import Exercise, Training
-from .forms import ExerciseForm, TrainingForm
+from .models import Exercise, Training, TrainingPlan
+from .forms import ExerciseForm, TrainingForm, TrainingPlanForm
 
 
 class MainPage(View):
@@ -44,3 +44,17 @@ class TrainingListView(ListView):
     model = Training
     paginate_by = 30
 
+
+class AddTrainingPlanView(CreateView):
+    model = TrainingPlan
+    success_url = reverse_lazy('main-page')
+    form_class = TrainingPlanForm
+    success_message = "Dodano plan treningowy!"
+
+    def get_success_message(self, cleaned_data):
+        return f"Dodano plan treningowy {cleaned_data['name']}"
+    
+
+class TrainingPlanListView(ListView):
+    model = TrainingPlan
+    paginate_by = 30
