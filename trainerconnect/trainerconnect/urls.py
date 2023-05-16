@@ -25,4 +25,5 @@ urlpatterns = [
     path("exercise_list/", ExerciseListView.as_view(), name="exercise-list"),
     path("add_training/", AddTrainingView.as_view(), name="add-training"),
     path("training_list/", TrainingListView.as_view(), name="training-list"),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]

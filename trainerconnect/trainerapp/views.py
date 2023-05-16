@@ -43,3 +43,4 @@ class AddTrainingView(CreateView):
 class TrainingListView(ListView):
     model = Training
     paginate_by = 30
+

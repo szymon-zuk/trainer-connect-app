@@ -58,6 +58,12 @@
     </div>
   </div>
 </nav>
+{% if user.is_authenticated %}
+  Witaj, {{ user.username }}!
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Log in!</button</a>
+{% endif %}
 <!-- //--------------------------- page content -------------------------// -->
 {% block content %}{% endblock content %}
 <!-- //--------------------------- page content end ---------------------// -->
