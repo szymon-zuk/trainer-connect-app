@@ -1,4 +1,4 @@
-from .models import Exercise, Training
+from .models import Exercise, Training, TrainingPlan
 from django.forms import ModelForm
 from django import forms
 
@@ -35,5 +35,5 @@ class TrainingPlanForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = Training
+        model = TrainingPlan
         fields = ['name', 'description', "trainings", 'user_id']
