@@ -1,4 +1,4 @@
-{% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,12 +58,20 @@
     </div>
   </div>
 </nav>
+
 {% if user.is_authenticated %}
-  Witaj, {{ user.username }}!
+    <a class="nav-item nav-link" href="{% url 'logout' %}">
+        Wyloguj <i class="fas fa-sign-out-alt"></i>
+    </a>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Log in!</button</a>
+    <a class="nav-item nav-link" href="{% url 'login' %}">
+        Zaloguj się <i class="fas fa-sign-in-alt"></i>
+    </a>
+    <a class="nav-item nav-link" href="{% url 'register' %}">
+        Załóż konto <i class="fas fa-user-plus"></i>
+    </a>
 {% endif %}
+
 <!-- //--------------------------- page content -------------------------// -->
 {% block content %}{% endblock content %}
 <!-- //--------------------------- page content end ---------------------// -->
