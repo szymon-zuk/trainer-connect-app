@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="alert alert-primary" role="alert">
+        Zostałeś wylogowany!
+      </div>
+      <h2>Zostałeś wylogowany </h2>
+      <div class="border-top pt-3" style="min-height:65vh;">
+        <small class="text-muted">
+            <a href="{% url "login" %}">Zaloguj się ponownie</a>
+        </small>
+      </div>
+{% endblock content %}

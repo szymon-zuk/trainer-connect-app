@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "trainerapp",
     "trainerconnect",
+    "users",
+    "crispy_forms",
 ]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
+
+LOGIN_REDIRECT_URL = "/"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
