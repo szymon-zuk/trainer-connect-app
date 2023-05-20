@@ -1,90 +1,85 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}{% endblock title %} |TrainerConnect|</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-</head>
-<body style="background-color:#FFFFFF;">
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <h1 class="mb-0 site-logo>"<a class="navbar-brand" href="#">TrainerConnect<span class="text-primary">.</span> </a></h1>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Strona główna</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-              <span>Terminarz</span>
-          </a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">
-              <span>Podopieczni</span>
-              <i class="fas fa-angle-down"></i>
-          </a>
-        </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Plany treningowe</a>
-              <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/add_training/">Dodaj ćwiczenie</a>
-                  <a class="dropdown-item" href="/exercise_list/">Lista ćwiczeń</a>
-                  <a class="dropdown-item" href="/add_training/">Dodaj trening</a>
-                  <a class="dropdown-item" href="/training_list/">Lista treningów</a>
-    </div>
-  </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">Płatności</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">Kontakt</a>
-          </li>
-          </ul>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-</nav>
-
-{% if user.is_authenticated %}
-    <a class="nav-item nav-link" href="{% url 'logout' %}">
-        Wyloguj <i class="fas fa-sign-out-alt"></i>
-    </a>
-{% else %}
-    <a class="nav-item nav-link" href="{% url 'login' %}">
-        Zaloguj się <i class="fas fa-sign-in-alt"></i>
-    </a>
-    <a class="nav-item nav-link" href="{% url 'register' %}">
-        Załóż konto <i class="fas fa-user-plus"></i>
-    </a>
-{% endif %}
-
-<!-- //--------------------------- page content -------------------------// -->
-{% block content %}{% endblock content %}
-<!-- //--------------------------- page content end ---------------------// -->
-
- <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-
-</body>
-
-
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>{% block title %}{% endblock title %} |TrainerConnect|</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
+         rel="stylesheet">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+   </head>
+   <body style="background-color:#FFFFFF;">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+         <div class="container-fluid">
+            <h1 class="mb-0 site-logo>"<a class="navbar-brand" href="#">TrainerConnect<span class="text-primary">.</span> </a></h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="nav justify-content-center">
+                  <li class="nav-item">
+                     <a class="nav-link active" aria-current="page" href="/">Strona główna</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span>Terminarz</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span>Podopieczni</span>
+                     <i class="fas fa-angle-down"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Plany treningowe</a>
+                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/add_training/">Dodaj ćwiczenie</a>
+                        <a class="dropdown-item" href="/exercise_list/">Lista ćwiczeń</a>
+                        <a class="dropdown-item" href="/add_training/">Dodaj trening</a>
+                        <a class="dropdown-item" href="/training_list/">Lista treningów</a>
+                     </div>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">Płatności</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">Kontakt</a>
+                  </li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">
+                     Wyloguj <i class="fas fa-sign-out-alt"></i>
+                     </a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'login' %}">
+                     Zaloguj się <i class="fas fa-sign-in-alt"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="{% url 'register' %}">
+                     Załóż konto <i class="fas fa-user-plus"></i>
+                     </a>
+                  </li>
+                  {% endif %}
+               </ul>
+               </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <!-- //--------------------------- page content -------------------------// -->
+      {% block content %}{% endblock content %}
+      <!-- //--------------------------- page content end ---------------------// -->
+      <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+         crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+         crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+   </body>
 </html>

@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "trainerapp",
-    "trainerconnect",
     "users",
     "crispy_forms",
 ]
@@ -46,6 +45,8 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
 LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = '/logout/'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

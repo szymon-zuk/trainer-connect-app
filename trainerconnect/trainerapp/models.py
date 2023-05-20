@@ -39,7 +39,10 @@ class Training(models.Model):
           ("Ndz", "Niedziela"),
     )
     day_name = models.CharField(default="Pn", choices=days)
-    exercises = models.ManyToManyField(Exercise, through="ExerciseTraining")
+    exercises = models.ManyToManyField(Exercise, through="ExerciseTraining", blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class ExerciseTraining(models.Model):
@@ -57,5 +60,5 @@ class TrainingPlan(models.Model):
     """
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
-    trainings = models.ForeignKey(Training, on_delete=models.CASCADE)
+    trainings = models.ForeignKey(Training, on_delete=models.CASCADE, null=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

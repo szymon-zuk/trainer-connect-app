@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Rejestracja użytkownika{% endblock title %}
+
+{% block content %} 
+    <h2>Rejestracja użytkownika</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zarejestruj się</button>
+        <br><br>
+        <a href="{% url 'main-page' %}">Strona główna</a>
+    </form>
+{% endblock content %}
