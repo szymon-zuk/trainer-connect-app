@@ -77,12 +77,3 @@ class TrainingPlanListView(ListView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search', '')
         return context
-
-
-class TraineeListView(View):
-    def get(self, request):
-        trainees = User.objects.all()
-        ctx = {
-            'trainees': trainees,
-        }
-        return render(request, "trainee_list.html", ctx)

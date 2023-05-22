@@ -4,9 +4,9 @@
     <form method="get" action="{% url "training-plan-list" %}">
         <input type="text" name="search" value="{{ search_query }}">
         <button type="submit">Szukaj</button>
-    </form><br>
-    <a href="/add_training_plan/">
-        <button type="button" class="btn btn-primary">Dodaj plan treningowy</button>
+    </form>
+    <a href="/add_training/">
+        <button type="button" class="btn btn-primary">Dodaj trening</button>
     </a><br><br>
     <ul>
     {% comment %} {% for object in object_list %}
@@ -30,7 +30,11 @@
           <tr>
             <th scope="row">{{ object.id }}</th>
             <td>{{ object.name }}</td>
-            <td>{{ object.trainings }}</td>
+            <td>
+                {% for training in object.trainings.all %}
+                    {{ training }}
+                {% endfor %}
+            </td>
             <td>{{ object.user_id }}</td>
           </tr>
             {% empty %}

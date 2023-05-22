@@ -24,7 +24,6 @@ from trainerapp.views import (
     TrainingListView,
     AddTrainingPlanView,
     TrainingPlanListView,
-    TraineeListView
 )
 from users.views import AppLoginView, AppLogoutView, RegisterView
 from django.contrib.auth import views as auth_views
@@ -80,5 +79,4 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
-    path('trainee_list/', TraineeListView.as_view(), name="trainee-list"),
 ]
