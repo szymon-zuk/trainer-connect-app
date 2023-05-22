@@ -59,6 +59,8 @@ try:
     from .local_settings import EMAIL_USE_TLS, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 except ModuleNotFoundError:
     print("niepoprawna konfiguracja local_settings.py")
+    print("Brak konfiguracji serwera SMTP w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
 
 
 MIDDLEWARE = [

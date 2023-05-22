@@ -62,6 +62,7 @@ class AddTrainingPlanView(CreateView):
 
 class TrainingPlanListView(ListView):
     model = TrainingPlan
+    paginate_by = 30
     context_object_name = 'training_plan_list'
     template_name = "trainingplan_list.html"
 
