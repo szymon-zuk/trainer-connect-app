@@ -1,7 +1,9 @@
+from typing import Any, Dict
+from django.db import models
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from .models import Exercise, Training, TrainingPlan
 from .forms import ExerciseForm, TrainingForm, TrainingPlanForm
 
@@ -55,6 +57,20 @@ class AddTrainingPlanView(CreateView):
         return f"Dodano plan treningowy {cleaned_data['name']}"
     
 
-class TrainingPlanListView(ListView):
+class TrainingPlanListView(DetailView):
     model = TrainingPlan
     paginate_by = 30
+    context_object_name = training_plan_list
+    template_name = "trainingplan_list.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            return TrainingPlan.objects.filter(name__icontains=query)
+        else:
+            return TrainingPlan.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(TrainingPlan, self).get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('search', '')
+        return context
