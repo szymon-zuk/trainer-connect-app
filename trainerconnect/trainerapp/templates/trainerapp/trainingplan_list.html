@@ -1,15 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Lista planów treningowych:</h2>
+    <form method="get" action="{% url "training-plan-list" %}">
+        <input type="text" name="search" value="{{ search_query }}">
+        <button type="submit">Szukaj</button>
+    </form><br>
     <a href="/add_training_plan/">
         <button type="button" class="btn btn-primary">Dodaj plan treningowy</button>
     </a><br><br>
     <ul>
-    {% for object in object_list %}
+    {% comment %} {% for object in object_list %}
         <li>Nazwa: {{ object.name }}</li>
         <li>Opis: {{ object.description }} </li>
         <li>Treningi: {{ object.trainings }} </li>
         <li>Użytkownik: {{ object.user_id }}</li><br>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Numer</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Treningi</th>
+            <th scope="col">Użytkownik</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+          <tr>
+            <th scope="row">{{ object.id }}</th>
+            <td>{{ object.name }}</td>
+            <td>{{ object.trainings }}</td>
+            <td>{{ object.user_id }}</td>
+          </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Brak planów</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+
     </ul>
 {% endblock %}

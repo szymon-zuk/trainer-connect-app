@@ -32,11 +32,10 @@ class TrainingForm(forms.ModelForm):
 
     class Meta:
         model = Training
-        fields = ["name", "description", "day_name", "exercises"]
+        fields = ["name", "description", "exercises"]
         labels = {
             "name": "Nazwa treningu",
             "description": "Opis",
-            "day_name": "Dzień tygodnia",
             "exercises": "Ćwiczenia",
         }
 

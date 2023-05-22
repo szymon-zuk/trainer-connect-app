@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from .models import Exercise, Training, TrainingPlan
 from .forms import ExerciseForm, TrainingForm, TrainingPlanForm
 
@@ -62,15 +62,26 @@ class AddTrainingPlanView(CreateView):
 
 class TrainingPlanListView(ListView):
     model = TrainingPlan
-    paginate_by = 30
+    context_object_name = 'training_plan_list'
+    template_name = "trainingplan_list.html"
 
-# nie działa
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            return TrainingPlan.objects.filter(name__icontains=query)
+        else:
+            return TrainingPlan.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('search', '')
+        return context
+
+
 class TraineeListView(View):
     def get(self, request):
         trainees = User.objects.all()
-        training_plan = TrainingPlan.objects.all()
         ctx = {
             'trainees': trainees,
-            'training_plans': training_plan
         }
         return render(request, "trainee_list.html", ctx)
