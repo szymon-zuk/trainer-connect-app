@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-u6q4gv)5h*xs%crcci0w5ue6abra%jiacf_5g39zmd6i7ovyov"
+SECRET_KEY = "1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,8 +52,14 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "trainerconnect1@gmail.com"
-EMAIL_HOST_PASSWORD = "dupcia2137"
+EMAIL_HOST_USER = "1"
+EMAIL_HOST_PASSWORD = "1"
+
+try:
+    from .local_settings import EMAIL_USE_TLS, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+except ModuleNotFoundError:
+    print("niepoprawna konfiguracja local_settings.py")
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
