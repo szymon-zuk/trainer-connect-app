@@ -60,10 +60,6 @@ try:
 except ModuleNotFoundError:
     print("niepoprawna konfiguracja local_settings.py")
 
-try:
-    from .local_settings import EMAIL_USE_TLS, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
-except ModuleNotFoundError:
-    print("Sprawdź ustawienia pliku settings.py")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
