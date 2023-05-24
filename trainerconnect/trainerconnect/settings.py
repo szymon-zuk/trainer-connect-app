@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "trainerapp",
     "users",
     "crispy_forms",
+    "channels"
 ]
 
 CRISPY_TEMPLATE_PACK = "uni_form"
