@@ -50,7 +50,7 @@ class TrainingPlan(models.Model):
     """
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
-    trainings = models.ManyToManyField(Training, null=True)
+    trainings = models.ManyToManyField(Training)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):

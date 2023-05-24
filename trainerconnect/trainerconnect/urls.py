@@ -32,7 +32,7 @@ from trainerapp.views import (
     DeleteTrainingPlanView
 )
 from users.views import AppLoginView, AppLogoutView, RegisterView
-from chat.views import ThreadView, AddThreadView, AddMessageView
+from chat.views import ThreadListView, AddThreadView, AddMessageView
 from django.contrib.auth import views as auth_views
 from django.urls import path
 

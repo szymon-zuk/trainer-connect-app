@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -21,7 +22,7 @@ class AddExerciseView(CreateView):
     success_url = reverse_lazy("main-page")
     form_class = ExerciseForm
 
-    def form_valid(self, form: ExerciseForm) -> HttpResponse:
+    def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Dodano ćwiczenie!")
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -58,7 +59,7 @@ class UpdateExerciseView(UpdateView):
     }
     success_url = reverse_lazy("exercise-list")
 
-    def form_valid(self, form: ExerciseForm) -> HttpResponse:
+    def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -81,7 +82,7 @@ class AddTrainingView(CreateView):
     success_url = reverse_lazy("main-page")
     form_class = TrainingForm
 
-    def form_valid(self, form: TrainingForm) -> HttpResponse:
+    def form_valid(self, form: TrainingForm):
         messages.success(self.request, "Dodano trening!")
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -113,7 +114,7 @@ class UpdateTrainingView(UpdateView):
     }
     success_url = reverse_lazy("training-list")
 
-    def form_valid(self, form: TrainingForm) -> HttpResponse:
+    def form_valid(self, form: TrainingForm):
         messages.success(self.request, "Zaktualizowano trening!")
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -135,7 +136,7 @@ class AddTrainingPlanView(CreateView):
     success_url = reverse_lazy("main-page")
     form_class = TrainingPlanForm
 
-    def form_valid(self, form: TrainingPlanForm) -> HttpResponse:
+    def form_valid(self, form: TrainingPlanForm):
         messages.success(self.request, "Dodano plan treningowy!")
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -173,7 +174,7 @@ class UpdateTrainingPlanView(UpdateView):
     }
     success_url = reverse_lazy("training-plan-list")
     
-    def form_valid(self, form: TrainingPlanForm) -> HttpResponse:
+    def form_valid(self, form: TrainingPlanForm):
         messages.success(self.request, "Zaktualizowano plan treningowy!")
         return self.render_to_response(self.get_context_data(form=form))
     

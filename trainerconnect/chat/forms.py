@@ -1,6 +1,9 @@
 from django.forms import ModelForm
 from django import forms
 
+from .models import Thread, Message
+
+
 class ThreadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ThreadForm, self).__init__(*args, **kwargs)
@@ -9,13 +12,14 @@ class ThreadForm(forms.ModelForm):
 
     class Meta:
         model = Thread
-        fields = ['__all__']
+        fields = '__all__'
         labels = {
             "name": "Nazwa",
             "trainer_id": "Trener",
             "trainee_id": "Podopieczny",
             "description": "Opis",
         }
+
 
 class MessageForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -28,6 +32,6 @@ class MessageForm(forms.ModelForm):
         exclude = ["created"]
         labels = {
             "username": "Użytkownik",
-            "text": "Trener",
+            "text": "Treść",
             "thread": "Konwersacja",
         }
