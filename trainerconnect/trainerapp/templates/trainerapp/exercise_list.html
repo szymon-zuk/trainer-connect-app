@@ -5,12 +5,38 @@
         <button type="button" class="btn btn-primary">Dodaj ćwiczenie</button>
     </a><br><br>
     <ul>
-    {% for object in object_list %}
-        <li>Nazwa: {{ object.name }}</li>
-        <li>Ilość serii: {{ object.sets }} </li>
-        <li>Ilość powtórzeń: {{ object.reps }} </li>
-        <li>Ciężar: {{ object.load }} </li>
-        <li>Komentarz: {{ object.comment }} </li><br>
-    {% endfor %}
+    <form method="get" action="{% url "exercise-list" %}">
+        <input type="text" name="search" value="{{ search_query }}">
+        <button type="submit">Szukaj</button>
+    </form>
+    <ul>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Numer</th>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Ilość serii</th>
+            <th scope="col">Ilość powtórzeń</th>
+            <th scope="col">Ciężar</th>
+            <th scope="col">Komentarz</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+          <tr>
+            <th scope="row">{{ object.id }}</th>
+            <td>{{ object.name }}</td>
+            <td>{{ object.sets }}</td>
+            <td>{{ object.reps }}</td>
+            <td>{{ object.load }}</td>
+            <td>{{ object.comment }}</td>
+          </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Brak ćwiczeń</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
     </ul>
 {% endblock %}

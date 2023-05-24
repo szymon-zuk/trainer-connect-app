@@ -25,7 +25,7 @@
             <td>{{ object.name }}</td>
             <td>
                 {% for training in object.trainings.all %}
-                    {{ training }}
+                    <li>{{ training }}</li>
                 {% endfor %}
             </td>
             <td>{{ object.user_id }}</td>

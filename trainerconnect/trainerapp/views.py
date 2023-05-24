@@ -44,6 +44,7 @@ class ExerciseListView(ListView):
         context['search_query'] = self.request.GET.get('search', '')
         return context
 
+
 class UpdateExerciseView(UpdateView):
     """A view that lets you update the properties of an exercise"""
 
@@ -61,6 +62,7 @@ class UpdateExerciseView(UpdateView):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")
         return self.render_to_response(self.get_context_data(form=form))
 
+
 class DeleteExerciseView(DeleteView):
     """A view that lets you delete a single exercise"""
 
@@ -70,6 +72,7 @@ class DeleteExerciseView(DeleteView):
     
     def get_success_message(self, cleaned_data):
         return f"Usunięto ćwiczenie {cleaned_data['name']}"
+
 
 class AddTrainingView(CreateView):
     """Implements a form that adds a training to database"""
@@ -99,6 +102,7 @@ class TrainingListView(ListView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search', '')
         return context
+
 
 class UpdateTrainingView(UpdateView):
     model = Training
@@ -155,6 +159,7 @@ class TrainingPlanListView(ListView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search', '')
         return context
+
 
 class UpdateTrainingPlanView(UpdateView):
     """A view that lets you update a training plan"""
