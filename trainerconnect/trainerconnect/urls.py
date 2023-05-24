@@ -24,6 +24,12 @@ from trainerapp.views import (
     TrainingListView,
     AddTrainingPlanView,
     TrainingPlanListView,
+    UpdateExerciseView,
+    DeleteExerciseView,
+    UpdateTrainingView,
+    DeleteTrainingView,
+    UpdateTrainingPlanView,
+    DeleteTrainingPlanView
 )
 from users.views import AppLoginView, AppLogoutView, RegisterView
 from chat.views import ThreadView, AddThreadView
@@ -35,12 +41,18 @@ urlpatterns = [
     path("", MainPage.as_view(), name="main-page"),
     path("add_exercise/", AddExerciseView.as_view(), name="add-exercise"),
     path("exercise_list/", ExerciseListView.as_view(), name="exercise-list"),
+    path("update_exercise/", UpdateExerciseView.as_view(), name="update-exercise"),
+    path("delete_exercise/", DeleteExerciseView.as_view(), name="delete-exercise"),
     path("add_training/", AddTrainingView.as_view(), name="add-training"),
     path("training_list/", TrainingListView.as_view(), name="training-list"),
+    path("delete_training/", DeleteTrainingView.as_view(), name="delete-training"),
+    path("update_training/", UpdateTrainingView.as_view(), name="update-training"),
     path("add_training_plan/", AddTrainingPlanView.as_view(), name="add-training-plan"),
     path(
         "training_plan_list/", TrainingPlanListView.as_view(), name="training-plan-list"
     ),
+    path("update_training_plan/", UpdateTrainingPlanView.as_view(), name="update-training-plan"),
+    path("delete_training_plan/", DeleteTrainingPlanView.as_view(), name="delete-training-plan"),
     path("login/", AppLoginView.as_view(), name="login"),
     path("logout/", AppLogoutView.as_view(), name="logout"),
     path("register/", RegisterView.as_view(), name="register"),
