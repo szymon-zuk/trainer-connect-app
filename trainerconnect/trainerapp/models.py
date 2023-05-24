@@ -52,3 +52,6 @@ class TrainingPlan(models.Model):
     description = models.CharField(max_length=255)
     trainings = models.ManyToManyField(Training, null=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

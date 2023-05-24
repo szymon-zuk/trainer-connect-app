@@ -1,0 +1,39 @@
+{% {% extends 'base.html' %}%}
+{% block content %}
+<h2>Lista konwersacji:</h2>
+<form method="get" action="{% url "thread-list" %}">
+    <input type="text" name="search" value="{{ search_query }}">
+    <button type="submit">Szukaj</button>
+</form>
+<a href="/add_thread/">
+    <button type="button" class="btn btn-primary">Dodaj konwersację:</button>
+</a><br><br>
+<ul>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Numer</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Trener</th>
+        <th scope="col">Podopieczny</th>
+        <th scope"col">Opis</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for thread in thread_list %}
+      <tr>
+        <th scope="row">{{ thread.id }}</th>
+        <td>{{ thread.name }}</td>
+        <td>{{ thread.trainer_id }}</td>
+        <td>{{ thread.trainee_id }}</td>
+        <td>{{ thread.description }}</td>
+      </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Brak konwersacji</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</ul>
+{% endblock %}

@@ -26,6 +26,7 @@ from trainerapp.views import (
     TrainingPlanListView,
 )
 from users.views import AppLoginView, AppLogoutView, RegisterView
+from chat.views import ThreadView, AddThreadView
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
@@ -79,5 +80,6 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
-    path("", include("chat.urls")),
+    path('thread_list/', ThreadListView.as_view(), name="thread-list"),
+    path('add_thread/', AddThreadView.as_view(), name="add-thread"),
 ]
