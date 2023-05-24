@@ -1,6 +1,10 @@
+from typing import Any, Dict
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView
-from .models import Thread
+from .models import Thread, Message
+from .forms import ThreadForm
 
 
 class ThreadView(ListView):
@@ -26,9 +30,17 @@ class AddThreadView(CreateView):
     """View of adding a thread"""
     model = Thread
     success_url = "thread-list"
-    context_object_name = "thread_list"
     form_class = ThreadForm
-    success_message = "Dodano konwersację!"
+    
+    def form_valid(self, form: ThreadForm) -> HttpResponse:
+        messages.success(self.request, "Dodano konwersację!")
+        return self.render_to_response(self.get_context_data(form=form))
 
-    def get_success_message(self, cleaned_data):
-        return f"Dodano konwersację z {cleaned_data['trainee_id']}"
+class AddMessageView(CreateView):
+    model = Message
+    success_url = "message-list"
+    form_class = MessageForm
+
+    def form_valid(self, form: MessageForm) -> HttpResponse:
+        messages.success(self.request, "Wysłano wiadomość!")
+        return self.render_to_response(self.get_context_data(form=form))
