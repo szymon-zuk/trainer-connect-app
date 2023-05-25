@@ -23,6 +23,7 @@
           <tr>
             <th scope="row">{{ object.id }}</th>
             <td>{{ object.name }}</td>
+
             <td>
                 {% for training in object.trainings.all %}
                     <li>{{ training }}</li>

@@ -141,6 +141,7 @@ class AddTrainingPlanView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
+
 class TrainingPlanListView(ListView):
     """List view of all training plans"""
 
