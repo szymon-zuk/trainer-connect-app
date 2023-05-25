@@ -24,6 +24,7 @@ class AddExerciseView(CreateView):
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Dodano ćwiczenie!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
 
 
@@ -61,6 +62,7 @@ class UpdateExerciseView(UpdateView):
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
 
 
@@ -84,6 +86,7 @@ class AddTrainingView(CreateView):
 
     def form_valid(self, form: TrainingForm):
         messages.success(self.request, "Dodano trening!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
 
 
@@ -116,6 +119,7 @@ class UpdateTrainingView(UpdateView):
 
     def form_valid(self, form: TrainingForm):
         messages.success(self.request, "Zaktualizowano trening!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
 
 
@@ -138,6 +142,7 @@ class AddTrainingPlanView(CreateView):
 
     def form_valid(self, form: TrainingPlanForm):
         messages.success(self.request, "Dodano plan treningowy!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
 
 
@@ -177,6 +182,7 @@ class UpdateTrainingPlanView(UpdateView):
     
     def form_valid(self, form: TrainingPlanForm):
         messages.success(self.request, "Zaktualizowano plan treningowy!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
     
     
