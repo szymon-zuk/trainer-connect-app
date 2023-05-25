@@ -37,6 +37,7 @@ class AddThreadView(CreateView):
     
     def form_valid(self, form: ThreadForm):
         messages.success(self.request, "Dodano konwersację!")
+        form.save()
         return self.render_to_response(self.get_context_data(form=form))
 
 
