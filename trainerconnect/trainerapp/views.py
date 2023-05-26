@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .models import Exercise, Training, TrainingPlan
 from .forms import ExerciseForm, TrainingForm, TrainingPlanForm
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class MainPage(View):
     """View of the default page"""
@@ -15,12 +15,13 @@ class MainPage(View):
         return render(request, "main_page.html")
 
 
-class AddExerciseView(CreateView):
+class AddExerciseView(LoginRequiredMixin, CreateView):
     """Implements a form that adds an exercise to database"""
 
     model = Exercise
     success_url = reverse_lazy("main-page")
     form_class = ExerciseForm
+    redirect_field_name = reverse_lazy('add-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Dodano ćwiczenie!")
@@ -28,11 +29,12 @@ class AddExerciseView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class ExerciseListView(ListView):
+class ExerciseListView(LoginRequiredMixin, ListView):
     """Shows a list of all exercises"""
 
     model = Exercise
     paginate_by = 30
+    redirect_field_name = reverse_lazy('exercise-list')
 
     def get_queryset(self):
         query = self.request.GET.get('search')
@@ -47,7 +49,7 @@ class ExerciseListView(ListView):
         return context
 
 
-class UpdateExerciseView(UpdateView):
+class UpdateExerciseView(LoginRequiredMixin, UpdateView):
     """A view that lets you update the properties of an exercise"""
 
     model = Exercise
@@ -59,6 +61,7 @@ class UpdateExerciseView(UpdateView):
         "comment"
     }
     success_url = reverse_lazy("exercise-list")
+    redirect_field_name = reverse_lazy('update-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")
@@ -66,23 +69,25 @@ class UpdateExerciseView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class DeleteExerciseView(DeleteView):
+class DeleteExerciseView(LoginRequiredMixin, DeleteView):
     """A view that lets you delete a single exercise"""
 
     model = Exercise
     success_url = reverse_lazy("exercise-list")
     success_message = "Usunięto ćwiczenie!"
+    redirect_field_name = reverse_lazy('delete-exercise')
     
     def get_success_message(self, cleaned_data):
         return f"Usunięto ćwiczenie {cleaned_data['name']}"
 
 
-class AddTrainingView(CreateView):
+class AddTrainingView(LoginRequiredMixin, CreateView):
     """Implements a form that adds a training to database"""
 
     model = Training
-    success_url = reverse_lazy("main-page")
+    success_url = reverse_lazy("training-list")
     form_class = TrainingForm
+    redirect_field_name = reverse_lazy('add-training')
 
     def form_valid(self, form: TrainingForm):
         messages.success(self.request, "Dodano trening!")
@@ -90,10 +95,11 @@ class AddTrainingView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class TrainingListView(ListView):
+class TrainingListView(LoginRequiredMixin, ListView):
     """List view of all trainings"""
     model = Training
     paginate_by = 30
+    redirect_field_name = reverse_lazy('training-list')
 
     def get_queryset(self):
         query = self.request.GET.get('search')
