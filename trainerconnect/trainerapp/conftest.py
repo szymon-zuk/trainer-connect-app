@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 import pytest
 from django.test import Client
-from .models import Exercise
+from .models import Exercise, Training
 
 @pytest.fixture
 def user():
@@ -23,3 +23,13 @@ def exercise():
         comment="szeroki chwyt"
     )
     return e
+
+@pytest.fixture
+def training():
+    exercises = Exercise.objects.last()
+    t = Training.objects.create(
+    name="Trening nóg",
+    description="Poniedziałek, duża intensywność",
+    exercises=exercises
+    )
+    return t
