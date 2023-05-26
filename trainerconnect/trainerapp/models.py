@@ -16,7 +16,7 @@ class Exercise(models.Model):
         validators=(MinValueValidator(1), MaxValueValidator(50))
     )
     load = models.PositiveIntegerField()
-    comment = models.CharField(max_length=255)
+    comment = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
@@ -29,16 +29,6 @@ class Training(models.Model):
     """
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
-    days = (
-        ("Pn", "Poniedziałek"),
-        ("Wt", "Wtorek"),
-        ("Śr", "Środa"),
-        ("Czw", "Czwartek"),
-        ("Pt", "Piątek"),
-         ("Sob", "Sobota"),
-          ("Ndz", "Niedziela"),
-    )
-    day_name = models.CharField(default="Pn", choices=days)
     exercises = models.ManyToManyField(Exercise, through="ExerciseTraining", blank=True)
 
     def __str__(self):
@@ -60,5 +50,8 @@ class TrainingPlan(models.Model):
     """
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
-    trainings = models.ForeignKey(Training, on_delete=models.CASCADE, null=True)
+    trainings = models.ManyToManyField(Training)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

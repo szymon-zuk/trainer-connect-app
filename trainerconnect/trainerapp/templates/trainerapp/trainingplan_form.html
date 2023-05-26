@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h3>Dodaj plan treningowy:</h3>
-    <form action="{% url 'add-training' %}" method="POST">
+    <form action="{% url 'add-training-plan' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">

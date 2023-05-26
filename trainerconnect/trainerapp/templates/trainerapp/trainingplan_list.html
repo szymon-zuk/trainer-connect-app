@@ -9,13 +9,6 @@
         <button type="button" class="btn btn-primary">Dodaj trening</button>
     </a><br><br>
     <ul>
-    {% comment %} {% for object in object_list %}
-        <li>Nazwa: {{ object.name }}</li>
-        <li>Opis: {{ object.description }} </li>
-        <li>Treningi: {{ object.trainings }} </li>
-        <li>Użytkownik: {{ object.user_id }}</li><br>
-    {% endfor %} {% endcomment %}
-
     <table class="table">
         <thead>
           <tr>
@@ -30,13 +23,20 @@
           <tr>
             <th scope="row">{{ object.id }}</th>
             <td>{{ object.name }}</td>
-            <td>{{ object.description }}</td>
+
+            <td>
+                {% for training in object.trainings.all %}
+                    <li>{{ training }}</li>
+                {% endfor %}
+            </td>
             <td>{{ object.user_id }}</td>
           </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Brak planów</td>
+            </tr>
             {% endfor %}
         </tbody>
       </table>
-
-
     </ul>
 {% endblock %}

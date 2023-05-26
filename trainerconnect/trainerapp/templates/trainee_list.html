@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Lista wszystkich użytkowników oraz ich plany</h3>
+
+    {% for trainee in trainees %}
+        <li>Nazwa użytkownika: {{ trainee.username }}
+        </li>
+    {% endfor %}
+{% endblock %}

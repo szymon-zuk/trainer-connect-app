@@ -27,27 +27,31 @@
                      <span>Terminarz</span>
                      </a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span>Podopieczni</span>
-                     <i class="fas fa-angle-down"></i>
-                     </a>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Podopieczni</a>
+                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="trainee_list/">Lista podopiecznych</a>
+                         <a class="dropdown-item" href="/">Mój plan treningowy</a>
+                     </div>
                   </li>
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      Plany treningowe</a>
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/add_training/">Dodaj ćwiczenie</a>
+                        <a class="dropdown-item" href="/add_exercise/">Dodaj ćwiczenie</a>
                         <a class="dropdown-item" href="/exercise_list/">Lista ćwiczeń</a>
                         <a class="dropdown-item" href="/add_training/">Dodaj trening</a>
                         <a class="dropdown-item" href="/training_list/">Lista treningów</a>
+                         <a class="dropdown-item" href="/add_training_plan">Dodaj plan treningowy</a>
+                         <a class="dropdown-item" href="/training_plan_list">Lista planów treningowych</a>
                      </div>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">Płatności</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">Kontakt</a>
+                     <a class="nav-link" href="/thread_list/">Czat z trenerem</a>
                   </li>
                   {% if user.is_authenticated %}
                   <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">
@@ -72,6 +76,11 @@
             </div>
          </div>
       </nav>
+      {% if messages %}
+      <div class="alert alert-primary" role="alert">
+          <ul class="message-list">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
       <!-- //--------------------------- page content -------------------------// -->
       {% block content %}{% endblock content %}
       <!-- //--------------------------- page content end ---------------------// -->
