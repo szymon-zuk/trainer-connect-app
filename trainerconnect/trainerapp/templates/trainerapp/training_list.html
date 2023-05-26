@@ -4,7 +4,7 @@
     <form method="get" action="{% url "training-list" %}">
         <input type="text" name="search" value="{{ search_query }}">
         <button type="submit">Szukaj</button>
-    </form>
+    </form><br>
     <a href="/add_training/">
         <button type="button" class="btn btn-primary">Dodaj trening</button>
     </a><br><br>
@@ -13,23 +13,23 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">Numer</th>
             <th scope="col">Nazwa</th>
             <th scope="col">Opis</th>
             <th scope="col">Ćwiczenia</th>
+            <th scope="col">Usuń trening</th>
           </tr>
         </thead>
         <tbody>
             {% for object in object_list %}
           <tr>
-            <th scope="row">{{ object.id }}</th>
-            <td>{{ object.name }}</td>
+            <td><a href="/training_details/{{ object.id }}">{{ object.name }}</a></td>
             <td>{{ object.description }}</td>
             <td>
-                {% for exercise in object.trainings.all %}
-                    <li>{{ exercise }}</li>
+                {% for exercise in object.exercises.all %}
+                    <li><a href="/exercise_details/{{ exercise.id }}">{{ exercise }}</a></li>
                 {% endfor %}
             </td>
+          <td><a href="/delete_training/{{ object.id }}">Usuń</a></td>
           </tr>
             {% empty %}
             <tr>

@@ -8,6 +8,7 @@ from .models import Exercise, Training, TrainingPlan
 from .forms import ExerciseForm, TrainingForm, TrainingPlanForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 class MainPage(View):
     """View of the default page"""
 
@@ -19,7 +20,7 @@ class AddExerciseView(LoginRequiredMixin, CreateView):
     """Implements a form that adds an exercise to database"""
 
     model = Exercise
-    success_url = reverse_lazy("main-page")
+    success_url = reverse_lazy("exercise-list")
     form_class = ExerciseForm
     redirect_field_name = reverse_lazy('add-exercise')
 
@@ -61,7 +62,8 @@ class UpdateExerciseView(LoginRequiredMixin, UpdateView):
         "comment"
     }
     success_url = reverse_lazy("exercise-list")
-    redirect_field_name = reverse_lazy('update-exercise')
+    redirect_field_name = reverse_lazy('update_exercise/<int:pk>/')
+    template_name_suffix = "_update_form"
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")
@@ -79,6 +81,12 @@ class DeleteExerciseView(LoginRequiredMixin, DeleteView):
     
     def get_success_message(self, cleaned_data):
         return f"Usunięto ćwiczenie {cleaned_data['name']}"
+
+
+class ExerciseDetailView(LoginRequiredMixin, DetailView):
+    """Detailed information about exercise"""
+    model = Exercise
+    redirect_field_name = reverse_lazy('exercise-update')
 
 
 class AddTrainingView(LoginRequiredMixin, CreateView):
@@ -129,6 +137,12 @@ class UpdateTrainingView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
+class TrainingDetailView(LoginRequiredMixin, DetailView):
+    """Detailed view of a training plan"""
+    model = Training
+    redirect_field_name = reverse_lazy('training-update')
+
+
 class DeleteTrainingView(DeleteView):
     """A view that lets you delete a single training"""
 
@@ -152,7 +166,6 @@ class AddTrainingPlanView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-
 class TrainingPlanListView(ListView):
     """List view of all training plans"""
 
@@ -172,6 +185,12 @@ class TrainingPlanListView(ListView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search', '')
         return context
+
+
+class TrainingPlanDetailView(LoginRequiredMixin, DetailView):
+
+    model = TrainingPlan
+    redirect_field_name = reverse_lazy('training-plan-update')
 
 
 class UpdateTrainingPlanView(UpdateView):

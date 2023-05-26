@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ object.name }}</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Opis</th>
+      <th scope="col">Ćwiczenia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ object.name }}</th>
+      <td>{{ object.description }}</td>
+        <td>{% for exercise in object.exercises.all %}
+            <li><a href="/exercise_details/{{ exercise.id }}">{{ exercise.name }}</a></li>
+        {% endfor %}</td>
+        <td><a class="btn btn-primary" href="/update_exercise/{{ object.id }}" role="button">Aktualizuj</a></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
