@@ -22,7 +22,6 @@ class AddExerciseView(LoginRequiredMixin, CreateView):
     model = Exercise
     success_url = reverse_lazy("exercise-list")
     form_class = ExerciseForm
-    redirect_field_name = reverse_lazy('add-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Dodano ćwiczenie!")
@@ -62,8 +61,8 @@ class UpdateExerciseView(LoginRequiredMixin, UpdateView):
         "comment"
     }
     success_url = reverse_lazy("exercise-list")
-    redirect_field_name = reverse_lazy('update_exercise/<int:pk>/')
     template_name_suffix = "_update_form"
+    redirect_field_name = reverse_lazy('update-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")

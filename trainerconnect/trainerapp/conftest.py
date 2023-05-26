@@ -3,15 +3,18 @@ import pytest
 from django.test import Client
 from .models import Exercise, Training
 
+
 @pytest.fixture
 def user():
     user = User.objects.create_user(username="user", password="")
     return user
 
+
 @pytest.fixture
 def client():
     c = Client()
     return c
+
 
 @pytest.fixture
 def exercise():
@@ -23,6 +26,7 @@ def exercise():
         comment="szeroki chwyt"
     )
     return e
+
 
 @pytest.fixture
 def training():
