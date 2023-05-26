@@ -21,7 +21,7 @@ class AddExerciseView(LoginRequiredMixin, CreateView):
     model = Exercise
     success_url = reverse_lazy("main-page")
     form_class = ExerciseForm
-    redirect_field_name = reverse_lazy('login')
+    redirect_field_name = reverse_lazy('add-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Dodano ćwiczenie!")
@@ -34,7 +34,7 @@ class ExerciseListView(LoginRequiredMixin, ListView):
 
     model = Exercise
     paginate_by = 30
-    redirect_field_name = reverse_lazy('login')
+    redirect_field_name = reverse_lazy('exercise-list')
 
     def get_queryset(self):
         query = self.request.GET.get('search')
@@ -61,7 +61,7 @@ class UpdateExerciseView(LoginRequiredMixin, UpdateView):
         "comment"
     }
     success_url = reverse_lazy("exercise-list")
-    redirect_field_name = reverse_lazy('login')
+    redirect_field_name = reverse_lazy('update-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")

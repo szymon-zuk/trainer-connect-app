@@ -7,6 +7,33 @@ def test_main():
     assert response.status_code == 200
 
 @pytest.mark.django_db
+def test_add_exercise_view_requires_login(user, client):
+    response = client.get('/add_exercise/')
+    assert response.status_code == 302
+    assert response.url == '/add_exercise/'
+    client.force_login(user=user)
+    response = client.get('/add_exercise/')
+    assert response.status_code == 200
+
+@pytest.mark.django_db
+def test_exercise_list_view_requires_login(user, client):
+    response = client.get('/exercise_list/')
+    assert response.status_code == 302
+    assert response.url == '/exercise_list/'
+    client.force_login(user=user)
+    response = client.get('/exercise_list/')
+    assert response.status_code == 200
+
+@pytest.mark.django_db
+def test_exercise_list_view_requires_login(user, client):
+    response = client.get('/update_exercise/')
+    assert response.status_code == 302
+    assert response.url == '/update_exercise/'
+    client.force_login(user=user)
+    response = client.get('/update_exercise/')
+    assert response.status_code == 200
+
+@pytest.mark.django_db
 def test_add_exercise_view(client):
     response = client.get('/add_exercise/')
     assert response.status_code == 200
