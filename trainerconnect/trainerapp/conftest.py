@@ -30,7 +30,7 @@ def exercise():
 
 @pytest.fixture
 def training():
-    exercises = Exercise.objects.last()
+    exercises = exercise()
     t = Training.objects.create(
     name="Trening nóg",
     description="Poniedziałek, duża intensywność",

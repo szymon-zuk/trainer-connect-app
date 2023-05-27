@@ -59,9 +59,9 @@ urlpatterns = [
     path("training_plan_details/<int:pk>/", TrainingPlanDetailView.as_view(), name="training-plan-details"),
     path("update_training_plan/<int:pk>/", UpdateTrainingPlanView.as_view(), name="update-training-plan"),
     path("delete_training_plan/<int:pk>/", DeleteTrainingPlanView.as_view(), name="delete-training-plan"),
-    path("login/", AppLoginView.as_view(), name="login"),
-    path("logout/", AppLogoutView.as_view(), name="logout"),
-    path("register/", RegisterView.as_view(), name="register"),
+    path("login/", AppLoginView.as_view(template_name="registrations/login.html"), name="login"),
+    path("logout/", AppLogoutView.as_view(template_name=""), name="logout"),
+    path("register/", RegisterView.as_view(template_name='registrations/register.html'), name="register"),
     path(
         "change_password/",
         auth_views.PasswordChangeView.as_view(

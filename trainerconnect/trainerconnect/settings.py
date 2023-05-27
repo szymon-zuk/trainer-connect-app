@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     "trainerapp",
     "users",
     "crispy_forms",
+    'crispy_bootstrap5',
     "chat"
 ]
-
-CRISPY_TEMPLATE_PACK = "uni_form"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = "/"
 

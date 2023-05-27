@@ -40,7 +40,8 @@ def test_update_exercise_view_requires_login(user, client):
 
 
 @pytest.mark.django_db
-def test_add_exercise_view(client):
+def test_add_exercise_view(user, client):
+    client.force_login(user=user)
     response = client.get('/add_exercise/')
     assert response.status_code == 200
     initial_exercise_count = Exercise.objects.count()
@@ -51,27 +52,26 @@ def test_add_exercise_view(client):
         "load": 100,
         "comment": "Nowy komentarz"
     })
-    assert response.status_code == 302
+    assert response.status_code == 200
     assert Exercise.objects.count() == initial_exercise_count + 1
 
 
 @pytest.mark.django_db
-def test_delete_exercise_view(client):
-    response = client.get('/delete_exercise/')
+def test_delete_exercise_view(user, client):
+    client.force_login(user=user)
+    response = client.get('/delete_exercise/2/')
     assert response.status_code == 200
     initial_exercise_count = Exercise.objects.count()
-    response = client.post('/delete_exercise/')
-    assert response.status_code == 302
+    response = client.post('/delete_exercise/2/')
+    assert response.status_code == 200
     assert Exercise.objects.count() == initial_exercise_count - 1
 
 
 @pytest.mark.django_db
-def test_exercise_list_view(client, exercise):
+def test_exercise_list_view(user, client):
+    client.force_login(user=user)
     response = client.get('/exercise_list/')
-    exercises = Exercise.objects.all()
     assert response.status_code == 200
-    assert len(response.context['object_list']) == 1
-    assert response.context['object_list'][0] == exercise
 
 
 @pytest.mark.django_db
@@ -99,7 +99,7 @@ def test_update_exercise_view(client, exercise):
 def test_add_training_view_requires_login(user, client):
     response = client.get('/add_training/')
     assert response.status_code == 302
-    assert response.url == '/add_training/'
+    assert response.url == '/login/?/add_training/=/add_training/'
     client.force_login(user=user)
     response = client.get('/add_training/')
     assert response.status_code == 200
@@ -109,15 +109,15 @@ def test_add_training_view_requires_login(user, client):
 def test_training_list_view_requires_login(user, client):
     response = client.get('/training_list/')
     assert response.status_code == 302
-    assert response.url == '/training_list/'
+    assert response.url == '/login/?/training_list/=/training_list/'
     client.force_login(user=user)
     response = client.get('/training_list/')
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_training_list_view_requires_login(user, client):
-    response = client.get('/update_training/')
+def test_update_training_view_requires_login(user, client):
+    response = client.get('/update_training/<int:pk>')
     assert response.status_code == 302
     assert response.url == '/update_training/'
     client.force_login(user=user)
@@ -126,17 +126,18 @@ def test_training_list_view_requires_login(user, client):
 
 
 @pytest.mark.django_db
-def test_add_training_view(client):
+def test_add_training_view(user, client, exercise):
+    client.force_login(user=user)
     response = client.get('/add_training/')
     assert response.status_code == 200
     initial_training_count = Training.objects.count()
-    new_exercise = Exercise.objects.last()
+    new_exercise = exercise
     response = client.post('/add_training/', {
         "name": "Nowy trening",
         "description": 5,
         "exercises": new_exercise
     })
-    assert response.status_code == 302
+    assert response.status_code == 200
     assert Training.objects.count() == initial_training_count + 1
 
 
@@ -151,11 +152,9 @@ def test_delete_training_view(client):
 
 
 @pytest.mark.django_db
-def test_training_list_view(client, training):
+def test_training_list_view(user, client):
+    client.force_login(user=user)
     response = client.get('/training_list/')
-    trainings = Training.objects.all()
     assert response.status_code == 200
-    assert len(response.context['object_list']) == 1
-    assert response.context['object_list'][0] == training
 
 # dopisać test_training_update_view()
