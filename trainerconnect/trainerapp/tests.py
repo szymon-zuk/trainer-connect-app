@@ -185,7 +185,7 @@ def test_add_training_plan_view_requires_login(user, client, training):
 
 
 @pytest.mark.django_db
-def training_plan_list_view_requires_login(user, client):
+def test_training_plan_list_view_requires_login(user, client):
     response = client.get('/training_plan_list/')
     assert response.status_code == 302
     assert response.url == '/login/?next=/training_plan_list/'
@@ -195,7 +195,16 @@ def training_plan_list_view_requires_login(user, client):
 
 
 @pytest.mark.django_db
-def training_plan_list_view(user, client):
+def test_training_plan_list_view(user, client):
     client.force_login(user=user)
     response = client.get('/training_plan_list/')
     assert response.status_code == 200
+
+
+# @pytest.mark.django_db
+# def test_training_plan_detail_view_requires_login(user, client, training_plan):
+#     response = client.get(reverse("training-plan-details", kwargs={"pk": training_plan.id}))
+#     assert response.status_code == 302
+#     client.force_login(user=user)
+#     response = client.post(reverse("training-plan-details", kwargs={"pk": training_plan.id}))
+#     assert response.status_code == 200

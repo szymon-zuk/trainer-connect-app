@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 import pytest
 from django.test import Client
-from .models import Exercise, Training
+from .models import Exercise, Training, TrainingPlan
 
 
 @pytest.fixture
 def user():
-    user = User.objects.create_user(username="user", password="")
+    user = User.objects.create_user(id=1, username="user", password="")
     return user
 
 
@@ -37,3 +37,15 @@ def training(exercise):
     t.exercises.add(exercise)
     t.refresh_from_db()
     return t
+
+
+@pytest.fixture
+def training_plan(user, training):
+    user_test = User()
+    p = TrainingPlan.objects.create(
+        name="Nowy plan",
+        description="opis treningu",
+        trainings=training.id,
+        user_id=user_test
+    )
+    return p
