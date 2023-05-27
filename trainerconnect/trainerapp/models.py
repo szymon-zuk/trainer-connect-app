@@ -37,6 +37,7 @@ class Training(models.Model):
     def get_absolute_url(self):
         return reverse('Training', args=(self.pk,))
 
+
 class ExerciseTraining(models.Model):
     """
     Model that contains information about relation between :model:`trainer_app.training` and

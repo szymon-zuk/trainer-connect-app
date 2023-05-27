@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "users",
     "crispy_forms",
     'crispy_bootstrap5',
-    "chat"
+    "chat",
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 

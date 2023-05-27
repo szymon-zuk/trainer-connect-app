@@ -29,11 +29,11 @@ def exercise():
 
 
 @pytest.fixture
-def training():
-    exercises = exercise()
+def training(exercise):
     t = Training.objects.create(
     name="Trening nóg",
-    description="Poniedziałek, duża intensywność",
-    exercises=exercises
+    description="Poniedziałek, duża intensywność"
     )
+    t.exercises.add(exercise)
+    t.refresh_from_db()
     return t

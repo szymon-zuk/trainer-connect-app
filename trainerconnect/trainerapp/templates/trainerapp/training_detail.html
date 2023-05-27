@@ -16,7 +16,7 @@
         <td>{% for exercise in object.exercises.all %}
             <li><a href="/exercise_details/{{ exercise.id }}">{{ exercise.name }}</a></li>
         {% endfor %}</td>
-        <td><a class="btn btn-primary" href="/update_exercise/{{ object.id }}" role="button">Aktualizuj</a></td>
+        <td><a class="btn btn-primary" href="/update_training/{{ object.id }}" role="button">Aktualizuj</a></td>
     </tr>
   </tbody>
 </table>

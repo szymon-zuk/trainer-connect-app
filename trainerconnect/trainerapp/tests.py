@@ -1,6 +1,7 @@
 from django.test import Client
 from . models import Exercise, Training, TrainingPlan
 import pytest
+from django.urls import reverse
 
 
 def test_main():
@@ -30,12 +31,11 @@ def test_exercise_list_view_requires_login(user, client):
 
 
 @pytest.mark.django_db
-def test_update_exercise_view_requires_login(user, client):
-    response = client.get('/update_exercise/2/')
+def test_update_exercise_view_requires_login(user, client, exercise):
+    response = client.get(reverse("update-exercise", kwargs={"pk": exercise.id}))
     assert response.status_code == 302
-    assert response.url == '/login/?next=/update_exercise/2/'
     client.force_login(user=user)
-    response = client.get('/update_exercise/2/')
+    response = client.post(reverse("update-exercise", kwargs={"pk": exercise.id}))
     assert response.status_code == 200
 
 
@@ -57,7 +57,7 @@ def test_add_exercise_view(user, client):
 
 
 @pytest.mark.django_db
-def test_delete_exercise_view(user, client):
+def test_delete_exercise_view(user, client, exercise):
     client.force_login(user=user)
     response = client.get('/delete_exercise/2/')
     assert response.status_code == 200
@@ -75,8 +75,9 @@ def test_exercise_list_view(user, client):
 
 
 @pytest.mark.django_db
-def test_update_exercise_view(client, exercise):
-    response = client.get('/update_exercise/')
+def test_update_exercise_view(user, client, exercise):
+    client.force_login(user=user)
+    response = client.get(reverse("update-exercise", kwargs={"pk": exercise.id}))
     assert response.status_code == 200
     payload = {
         "name": "Update ćwiczenia",
@@ -85,8 +86,8 @@ def test_update_exercise_view(client, exercise):
         "load": 120,
         "comment": "Nowszy komentarz"
     }
-    response = client.post("/update_exercise/", payload)
-    assert response.status_code == 302
+    response = client.post(reverse("update-exercise", kwargs={"pk": exercise.id}), data=payload)
+    assert response.status_code == 200
     exercise.refresh_from_db()
     assert exercise.name == payload['name']
     assert exercise.sets == payload['sets']
@@ -116,12 +117,11 @@ def test_training_list_view_requires_login(user, client):
 
 
 @pytest.mark.django_db
-def test_update_training_view_requires_login(user, client):
-    response = client.get('/update_training/<int:pk>')
+def test_update_training_view_requires_login(user, client, training):
+    response = client.get(reverse("update-training", kwargs={"pk": training.id}))
     assert response.status_code == 302
-    assert response.url == '/update_training/'
     client.force_login(user=user)
-    response = client.get('/update_training/')
+    response = client.post(reverse("update-training", kwargs={"pk": training.id}))
     assert response.status_code == 200
 
 
@@ -131,22 +131,22 @@ def test_add_training_view(user, client, exercise):
     response = client.get('/add_training/')
     assert response.status_code == 200
     initial_training_count = Training.objects.count()
-    new_exercise = exercise
     response = client.post('/add_training/', {
         "name": "Nowy trening",
         "description": 5,
-        "exercises": new_exercise
+        "exercises": exercise.id
     })
     assert response.status_code == 200
     assert Training.objects.count() == initial_training_count + 1
 
 
 @pytest.mark.django_db
-def test_delete_training_view(client):
-    response = client.get('/delete_training/')
+def test_delete_training_view(user, client, training):
+    client.force_login(user=user)
+    response = client.get(reverse("delete-training", kwargs={"pk": training.id}))
     assert response.status_code == 200
     initial_training_count = Training.objects.count()
-    response = client.post('/delete_training/')
+    response = client.post(reverse("delete-training", kwargs={"pk": training.id}))
     assert response.status_code == 302
     assert Training.objects.count() == initial_training_count - 1
 
@@ -157,4 +157,45 @@ def test_training_list_view(user, client):
     response = client.get('/training_list/')
     assert response.status_code == 200
 
-# dopisać test_training_update_view()
+
+@pytest.mark.django_db
+def test_add_training_plan_view_requires_login(user, client):
+    response = client.get('/add_training_plan/')
+    assert response.status_code == 302
+    assert response.url == '/login/?next=/add_training_plan/'
+    client.force_login(user=user)
+    response = client.get('/add_training_plan/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_add_training_plan_view_requires_login(user, client, training):
+    client.force_login(user=user)
+    response = client.get('/add_training_plan/')
+    assert response.status_code == 200
+    initial_training_plan_count = TrainingPlan.objects.count()
+    response = client.post('/add_training_plan/', {
+        "name": "Nowy plan treningowy",
+        "description": 5,
+        "trainings": training.id,
+        "user_id": user.id
+    })
+    assert response.status_code == 200
+    assert Training.objects.count() == initial_training_plan_count + 1
+
+
+@pytest.mark.django_db
+def training_plan_list_view_requires_login(user, client):
+    response = client.get('/training_plan_list/')
+    assert response.status_code == 302
+    assert response.url == '/login/?next=/training_plan_list/'
+    client.force_login(user=user)
+    response = client.get('/training_plan_list/')
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def training_plan_list_view(user, client):
+    client.force_login(user=user)
+    response = client.get('/training_plan_list/')
+    assert response.status_code == 200

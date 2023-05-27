@@ -53,16 +53,9 @@ class UpdateExerciseView(LoginRequiredMixin, UpdateView):
     """A view that lets you update the properties of an exercise"""
 
     model = Exercise
-    fields = {
-        "name",
-        "sets",
-        "reps",
-        "load",
-        "comment"
-    }
+    form_class = ExerciseForm
     success_url = reverse_lazy("exercise-list")
     template_name_suffix = "_update_form"
-    redirect_field_name = reverse_lazy('update-exercise')
 
     def form_valid(self, form: ExerciseForm):
         messages.success(self.request, "Zaktualizowano ćwiczenie!")
@@ -80,9 +73,9 @@ class DeleteExerciseView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("exercise-list")
     success_message = "Usunięto ćwiczenie!"
     redirect_field_name = reverse_lazy('delete-exercise')
-    
+
     def get_success_message(self, cleaned_data):
-        return f"Usunięto ćwiczenie {cleaned_data['name']}"
+        return self.success_message
 
     def get_absolute_url(self):
         return reverse('delete-exercisee', kwargs={'pk': self.pk})
@@ -126,13 +119,11 @@ class TrainingListView(LoginRequiredMixin, ListView):
         return context
 
 
-class UpdateTrainingView(UpdateView):
+class UpdateTrainingView(LoginRequiredMixin, UpdateView):
+
     model = Training
-    fields = {
-        "name",
-        "description",
-        "exercises",
-    }
+    template_name_suffix = '_update_form'
+    form_class = TrainingForm
     success_url = reverse_lazy("training-list")
 
     def form_valid(self, form: TrainingForm):
@@ -147,18 +138,18 @@ class TrainingDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = reverse_lazy('training-update')
 
 
-class DeleteTrainingView(DeleteView):
+class DeleteTrainingView(LoginRequiredMixin, DeleteView):
     """A view that lets you delete a single training"""
 
     model = Training
     success_url = reverse_lazy("training-list")
     success_message = "Usunięto trening!"
-    
+
     def get_success_message(self, cleaned_data):
-        return f"Usunięto trening {cleaned_data['name']}"
+        return self.success_message
 
 
-class AddTrainingPlanView(CreateView):
+class AddTrainingPlanView(LoginRequiredMixin, CreateView):
     """Implements a form that adds a training plan to database"""
     model = TrainingPlan
     success_url = reverse_lazy("main-page")
@@ -170,7 +161,7 @@ class AddTrainingPlanView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class TrainingPlanListView(ListView):
+class TrainingPlanListView(LoginRequiredMixin, ListView):
     """List view of all training plans"""
 
     model = TrainingPlan
@@ -187,6 +178,9 @@ class TrainingPlanListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search', '')
+        context['object_list'] = TrainingPlan.objects.filter(user_id=self.request.user.id)
+        if self.request.user.is_superuser:
+            context['object_list'] = TrainingPlan.objects.all()
         return context
 
 
@@ -196,16 +190,12 @@ class TrainingPlanDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = reverse_lazy('training-plan-update')
 
 
-class UpdateTrainingPlanView(UpdateView):
+class UpdateTrainingPlanView(LoginRequiredMixin, UpdateView):
     """A view that lets you update a training plan"""
 
     model = TrainingPlan
-    fields = {
-        "name",
-        "description",
-        "trainings",
-        "user_id"
-    }
+    template_name_suffix = '_update_form'
+    form_class = TrainingPlanForm
     success_url = reverse_lazy("training-plan-list")
     
     def form_valid(self, form: TrainingPlanForm):
@@ -214,12 +204,12 @@ class UpdateTrainingPlanView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
     
     
-class DeleteTrainingPlanView(DeleteView):
+class DeleteTrainingPlanView(LoginRequiredMixin, DeleteView):
     """A view that lets you delete a single training plan"""
 
     model = TrainingPlan
     success_url = reverse_lazy("training-plan-list")
     success_message = "Usunięto plan treningowy!"
-    
+
     def get_success_message(self, cleaned_data):
-        return f"Usunięto trening {cleaned_data['name']}"
+        return self.success_message
