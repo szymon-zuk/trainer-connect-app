@@ -247,3 +247,22 @@ def test_update_training_plan_view_requires_login(user, client, training_plan):
 #     assert training_plan.name == payload['name']
 #     assert training_plan.description == payload['description']
 #     assert training_plan.trainings == payload['trainings']
+
+
+@pytest.mark.django_db
+def test_delete_training_plan_view_requires_login(user, client, training_plan):
+    response = client.get(reverse("delete-training-plan", kwargs={"pk": training_plan.id}))
+    assert response.status_code == 302
+    client.force_login(user=user)
+    response = client.post(reverse("delete-training-plan", kwargs={"pk": training_plan.id}))
+    assert response.status_code == 302
+
+@pytest.mark.django_db
+def test_delete_training_plan_view(user, client, training_plan):
+    client.force_login(user=user)
+    response = client.get(reverse("delete-training-plan", kwargs={"pk": training_plan.id}))
+    assert response.status_code == 200
+    initial_training_plan_count = TrainingPlan.objects.count()
+    response = client.post(reverse("delete-training-plan", kwargs={"pk": training_plan.id}))
+    assert response.status_code == 302
+    assert TrainingPlan.objects.count() == initial_training_plan_count - 1
