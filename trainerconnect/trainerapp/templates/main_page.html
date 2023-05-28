@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% if user.is_authenticated %}
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-  <div class="carousel-inner">
+  <div class="carousel-inner w-75 p-3 mx-auto h-50">
     <div class="carousel-item active">
       <img class="d-block w-100" src="https://greekreporter.com/wp-content/uploads/2023/01/kyriakos-grizzly-credit-kyriakos-kapakoulak-youtube.jpg" class="d-block w-100" alt="..." width="50" height="700">
     </div>
@@ -27,4 +27,12 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+    {% else %}
+    <div class="d-flex justify-content-center">
+        <h2>Witaj w aplikacji TrainerConnect!</h2><br>
+    </div>
+    <div class="d-flex justify-content-center">
+        Aby kontynuować&nbsp<a href="{% url 'login' %}">zaloguj się&nbsp</a>lub&nbsp<a href="{% url 'register' %}">załóż konto</a>
+    </div>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ object.name }}</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Ilość serii</th>
+      <th scope="col">Ilość powtórzeń</th>
+        <th scope="col">Ciężar</th>
+        <th scope="col">Komentarz</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ object.name }}</th>
+      <td>{{ object.sets }}</td>
+      <td>{{ object.reps }}</td>
+      <td>{{ object.load }}</td>
+      <td>{{ object.comment }}</td>
+        <td><a class="btn btn-primary" href="/update_exercise/{{ object.id }}" role="button">Aktualizuj</a></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

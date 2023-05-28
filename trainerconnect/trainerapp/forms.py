@@ -2,9 +2,6 @@ from .models import Exercise, Training, TrainingPlan
 from django.forms import ModelForm
 from django import forms
 
-# rozważyć użycie django-crispy-forms do stylowania formularzy
-# from django.utils.translation import gettext as _
-
 
 class ExerciseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

@@ -1,35 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Lista ćwiczeń:</h2>
-    <a href="/add_exercise/">
-        <button type="button" class="btn btn-primary">Dodaj ćwiczenie</button>
-    </a><br><br>
-    <ul>
     <form method="get" action="{% url "exercise-list" %}">
         <input type="text" name="search" value="{{ search_query }}">
-        <button type="submit">Szukaj</button>
-    </form>
+        <button type="submit">Szukaj</button></form><br>
+    <a href="/add_exercise/">
+        <button type="button" class="btn btn-primary">Dodaj ćwiczenie</button>
+    </a><br>
+    <ul>
+
     <ul>
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">Numer</th>
             <th scope="col">Nazwa</th>
             <th scope="col">Ilość serii</th>
             <th scope="col">Ilość powtórzeń</th>
             <th scope="col">Ciężar</th>
             <th scope="col">Komentarz</th>
+              <th scope="col">Usuń ćwiczenie</th>
           </tr>
         </thead>
         <tbody>
             {% for object in object_list %}
           <tr>
-            <th scope="row">{{ object.id }}</th>
-            <td>{{ object.name }}</td>
+            <td><a href="/exercise_details/{{ object.id }}/">{{ object.name }}</a></td>
             <td>{{ object.sets }}</td>
             <td>{{ object.reps }}</td>
             <td>{{ object.load }}</td>
             <td>{{ object.comment }}</td>
+            <td><a href="/delete_exercise/{{ object.id }}">Usuń</a></td>
           </tr>
             {% empty %}
             <tr>
