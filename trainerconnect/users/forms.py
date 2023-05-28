@@ -5,9 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Sign Up Form
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text="Opcjonalne")
-    last_name = forms.CharField(max_length=30, required=False, help_text="Opcjonalne")
-    email = forms.EmailField(max_length=254, help_text="Wpisz swój adres e-mail")
 
     class Meta:
         model = User

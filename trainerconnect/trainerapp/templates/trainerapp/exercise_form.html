@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h3>Dodaj ćwiczenie:</h3>
+    <br>
+    <h3 class="d-flex justify-content-center">Dodaj ćwiczenie:</h3>
+    <div class="d-flex justify-content-center">
     <form action="{% url 'add-exercise' %}" method="POST">
     {% csrf_token %}
         {{ form|crispy }}
     <button type="submit" class="btn btn-primary" value="">Dodaj</button>
     </form>
+    </div>
 {% endblock %}
