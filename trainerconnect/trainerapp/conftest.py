@@ -41,11 +41,11 @@ def training(exercise):
 
 @pytest.fixture
 def training_plan(user, training):
-    user_test = User()
     p = TrainingPlan.objects.create(
         name="Nowy plan",
         description="opis treningu",
-        trainings=training.id,
-        user_id=user_test
+        user_id=user
     )
+    p.trainings.add(training)
+    p.refresh_from_db()
     return p

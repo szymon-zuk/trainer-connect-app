@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import View
@@ -16,18 +17,14 @@ class MainPage(View):
         return render(request, "main_page.html")
 
 
-class AddExerciseView(LoginRequiredMixin, CreateView):
+class AddExerciseView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Implements a form that adds an exercise to database"""
 
     model = Exercise
     success_url = reverse_lazy("exercise-list")
     form_class = ExerciseForm
     template_name = 'trainerapp/exercise_form.html'
-
-    def form_valid(self, form: ExerciseForm):
-        messages.success(self.request, "Dodano ćwiczenie!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
+    success_message = "Dodano ćwiczenie!"
 
 
 class ExerciseListView(LoginRequiredMixin, ListView):
@@ -49,36 +46,23 @@ class ExerciseListView(LoginRequiredMixin, ListView):
         return context
 
 
-class UpdateExerciseView(LoginRequiredMixin, UpdateView):
+class UpdateExerciseView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """A view that lets you update the properties of an exercise"""
 
     model = Exercise
     form_class = ExerciseForm
     success_url = reverse_lazy("exercise-list")
     template_name_suffix = "_update_form"
-
-    def form_valid(self, form: ExerciseForm):
-        messages.success(self.request, "Zaktualizowano ćwiczenie!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
-
-    def get_absolute_url(self):
-        return reverse('update-exercise', kwargs={'pk': self.pk})
+    success_message = "Zaktualizowano ćwiczenie!"
 
 
-class DeleteExerciseView(LoginRequiredMixin, DeleteView):
+class DeleteExerciseView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     """A view that lets you delete a single exercise"""
 
     model = Exercise
     success_url = reverse_lazy("exercise-list")
     success_message = "Usunięto ćwiczenie!"
     redirect_field_name = reverse_lazy('delete-exercise')
-
-    def get_success_message(self, cleaned_data):
-        return self.success_message
-
-    def get_absolute_url(self):
-        return reverse('delete-exercisee', kwargs={'pk': self.pk})
 
 
 class ExerciseDetailView(LoginRequiredMixin, DetailView):
@@ -87,18 +71,14 @@ class ExerciseDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = reverse_lazy('exercise-update')
 
 
-class AddTrainingView(LoginRequiredMixin, CreateView):
+class AddTrainingView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Implements a form that adds a training to database"""
 
     model = Training
     success_url = reverse_lazy("training-list")
     form_class = TrainingForm
     redirect_field_name = reverse_lazy('add-training')
-
-    def form_valid(self, form: TrainingForm):
-        messages.success(self.request, "Dodano trening!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
+    success_message = "Dodano trening!"
 
 
 class TrainingListView(LoginRequiredMixin, ListView):
@@ -119,17 +99,13 @@ class TrainingListView(LoginRequiredMixin, ListView):
         return context
 
 
-class UpdateTrainingView(LoginRequiredMixin, UpdateView):
-
+class UpdateTrainingView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    """Update view of a single training"""
     model = Training
     template_name_suffix = '_update_form'
     form_class = TrainingForm
     success_url = reverse_lazy("training-list")
-
-    def form_valid(self, form: TrainingForm):
-        messages.success(self.request, "Zaktualizowano trening!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
+    success_message = "Zaktualizowano trening!"
 
 
 class TrainingDetailView(LoginRequiredMixin, DetailView):
@@ -138,27 +114,21 @@ class TrainingDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = reverse_lazy('training-update')
 
 
-class DeleteTrainingView(LoginRequiredMixin, DeleteView):
+class DeleteTrainingView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     """A view that lets you delete a single training"""
 
     model = Training
     success_url = reverse_lazy("training-list")
     success_message = "Usunięto trening!"
 
-    def get_success_message(self, cleaned_data):
-        return self.success_message
 
-
-class AddTrainingPlanView(LoginRequiredMixin, CreateView):
+class AddTrainingPlanView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Implements a form that adds a training plan to database"""
     model = TrainingPlan
     success_url = reverse_lazy("main-page")
     form_class = TrainingPlanForm
+    success_message = "Dodano plan treningowy!"
 
-    def form_valid(self, form: TrainingPlanForm):
-        messages.success(self.request, "Dodano plan treningowy!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
 
 
 class TrainingPlanListView(LoginRequiredMixin, ListView):
@@ -185,31 +155,25 @@ class TrainingPlanListView(LoginRequiredMixin, ListView):
 
 
 class TrainingPlanDetailView(LoginRequiredMixin, DetailView):
-
+    """Details of a single training plan"""
     model = TrainingPlan
-    redirect_field_name = reverse_lazy('training-plan-update')
+    template_name_suffix = '_update_form'
 
 
-class UpdateTrainingPlanView(LoginRequiredMixin, UpdateView):
+class UpdateTrainingPlanView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """A view that lets you update a training plan"""
 
     model = TrainingPlan
     template_name_suffix = '_update_form'
     form_class = TrainingPlanForm
     success_url = reverse_lazy("training-plan-list")
-    
-    def form_valid(self, form: TrainingPlanForm):
-        messages.success(self.request, "Zaktualizowano plan treningowy!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
-    
-    
-class DeleteTrainingPlanView(LoginRequiredMixin, DeleteView):
+    success_message = 'Zaktualizowano plan treningowy!'
+
+
+class DeleteTrainingPlanView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     """A view that lets you delete a single training plan"""
 
     model = TrainingPlan
     success_url = reverse_lazy("training-plan-list")
     success_message = "Usunięto plan treningowy!"
 
-    def get_success_message(self, cleaned_data):
-        return self.success_message

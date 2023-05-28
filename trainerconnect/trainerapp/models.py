@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
+from django.contrib.auth.models import User
 import uuid
 
 
@@ -54,7 +55,7 @@ class TrainingPlan(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=255)
     trainings = models.ManyToManyField(Training)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-LOGIN_REDIRECT_URL = "/"
+# LOGIN_REDIRECT_URL = "/"
 
 LOGIN_URL = '/login/'
 
