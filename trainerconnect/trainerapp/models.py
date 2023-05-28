@@ -35,9 +35,6 @@ class Training(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('Training', args=(self.pk,))
-
 
 class ExerciseTraining(models.Model):
     """
