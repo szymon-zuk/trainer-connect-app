@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY", default='django_insecure')
+SECRET_KEY = config("SECRET_KEY", default="django_insecure")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False)
@@ -41,14 +41,14 @@ INSTALLED_APPS = [
     "trainerapp",
     "users",
     "crispy_forms",
-    'crispy_bootstrap5',
+    "crispy_bootstrap5",
     "chat",
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # LOGIN_REDIRECT_URL = "/"
 
-LOGIN_URL = '/login/'
+LOGIN_URL = "/login/"
 
 LOGOUT_REDIRECT_URL = "/logout/"
 
@@ -60,13 +60,13 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config("DB_NAME"),
-        'HOST': config("DB_HOST"),
-        'PASSWORD': config("DB_PASSWORD"),
-        'USER': config("DB_USER"),
-        'PORT': config("DB_PORT")
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": config("DB_NAME"),
+        "HOST": config("DB_HOST"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "USER": config("DB_USER"),
+        "PORT": config("DB_PORT"),
     }
 }
 

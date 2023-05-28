@@ -19,11 +19,7 @@ def client():
 @pytest.fixture
 def exercise():
     e = Exercise.objects.create(
-        name="Wyciskanie leżąc",
-        sets=5,
-        reps=5,
-        load=100,
-        comment="szeroki chwyt"
+        name="Wyciskanie leżąc", sets=5, reps=5, load=100, comment="szeroki chwyt"
     )
     return e
 
@@ -31,8 +27,7 @@ def exercise():
 @pytest.fixture
 def training(exercise):
     t = Training.objects.create(
-    name="Trening nóg",
-    description="Poniedziałek, duża intensywność"
+        name="Trening nóg", description="Poniedziałek, duża intensywność"
     )
     t.exercises.add(exercise)
     t.refresh_from_db()
@@ -42,9 +37,7 @@ def training(exercise):
 @pytest.fixture
 def training_plan(user, training):
     p = TrainingPlan.objects.create(
-        name="Nowy plan",
-        description="opis treningu",
-        user_id=user
+        name="Nowy plan", description="opis treningu", user_id=user
     )
     p.trainings.add(training)
     p.refresh_from_db()

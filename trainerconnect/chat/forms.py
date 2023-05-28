@@ -12,7 +12,7 @@ class ThreadForm(forms.ModelForm):
 
     class Meta:
         model = Thread
-        fields = '__all__'
+        fields = "__all__"
         labels = {
             "name": "Nazwa",
             "trainer_id": "Trener",

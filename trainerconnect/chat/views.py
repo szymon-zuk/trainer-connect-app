@@ -11,13 +11,14 @@ from django.contrib import messages
 
 class ThreadListView(ListView):
     """List view of all threads - trainee only sees one, and trainer sees all of them"""
+
     model = Thread
     paginate_by = 20
-    context_object_name = 'thread_list'
+    context_object_name = "thread_list"
     template_name = "thread_list.html"
 
     def get_queryset(self):
-        query = self.request.GET.get('search')
+        query = self.request.GET.get("search")
         if query:
             return Thread.objects.filter(name__icontains=query)
         else:
@@ -25,16 +26,17 @@ class ThreadListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search_query'] = self.request.GET.get('search', '')
+        context["search_query"] = self.request.GET.get("search", "")
         return context
 
 
 class AddThreadView(CreateView):
     """View of adding a thread"""
+
     model = Thread
-    success_url = reverse_lazy('thread-list')
+    success_url = reverse_lazy("thread-list")
     form_class = ThreadForm
-    
+
     def form_valid(self, form: ThreadForm):
         messages.success(self.request, "Dodano konwersację!")
         form.save()

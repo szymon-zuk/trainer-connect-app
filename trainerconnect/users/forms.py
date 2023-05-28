@@ -5,7 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Sign Up Form
 class RegisterForm(UserCreationForm):
-
     class Meta:
         model = User
         fields = [

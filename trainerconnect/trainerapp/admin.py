@@ -6,4 +6,3 @@ admin.site.register(Exercise)
 admin.site.register(Training)
 admin.site.register(TrainingPlan)
 admin.site.register(ExerciseTraining)
-
