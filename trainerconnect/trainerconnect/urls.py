@@ -34,6 +34,7 @@ from trainerapp.views import (
     TrainingDetailView,
     TrainingPlanDetailView,
 )
+from calendar_schedule.views import get_events
 from users.views import AppLoginView, AppLogoutView, RegisterView
 from chat.views import ThreadListView, AddThreadView, AddMessageView
 from django.contrib.auth import views as auth_views
@@ -145,4 +146,5 @@ urlpatterns = [
     path("thread_list/", ThreadListView.as_view(), name="thread-list"),
     path("add_thread/", AddThreadView.as_view(), name="add-thread"),
     path("add_message/", AddMessageView.as_view(), name="add-message"),
+    path('events/', get_events, name="events"),
 ]
