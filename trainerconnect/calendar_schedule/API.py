@@ -2,7 +2,6 @@ from apiclient.discovery import build
 import pickle
 from google_auth_oauthlib.flow import InstalledAppFlow
 from datetime import datetime
-from .views import
 
 
 class GoogleCalendar:
