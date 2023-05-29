@@ -26,7 +26,7 @@ class CreateEventView(SuccessMessageMixin, LoginRequiredMixin, View):
             location = form.cleaned_data['location']
             event_description = form.cleaned_data['event_description']
             GoogleCalendar.send_to_API(title, start_time, end_time, host_email, guest_email, location, event_description)
-            
+
             """assign event_id from google calendar to event_id of the form"""
             replace = form.save(commit=False)
             replace.event_id = GoogleCalendar.get_event_id()
@@ -34,3 +34,10 @@ class CreateEventView(SuccessMessageMixin, LoginRequiredMixin, View):
             form.save()
             return redirect('event:home')
         return render(request, "create_event.html", {'form': form})
+    
+
+class EventListView(LoginRequiredMixin, View):
+    def get(self, request):
+
+        event_list = Event.objects.all()
+        return render(request, 'my_events.html', {'object': event_list})
