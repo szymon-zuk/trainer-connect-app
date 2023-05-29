@@ -41,3 +41,15 @@ class GoogleCalendar:
             },
         }
         service.events().insert(calendarId=calendar_id, body=event).execute()
+
+    def get_event_id():
+        """ This function return google calendar event id as string - last value from table"""
+        credentials = pickle.load(open("token.pkl", "rb"))
+        service = build("calendar", "v3", credentials=credentials)
+        result = service.calendarList().list().execute()
+        calendar_id = result['items'][0]['id']
+        result = service.events().list(calendarId=calendar_id, maxResults=2400).execute()
+        table_size = len(result['items'])
+        event_id = result['items'][table_size - 1]['id']
+        return event_id
+    
