@@ -3,7 +3,8 @@ from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Thread, Message
 from .forms import ThreadForm, MessageForm
 from django.contrib import messages
@@ -27,27 +28,32 @@ class ThreadListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["search_query"] = self.request.GET.get("search", "")
+        context["object_list"] = Thread.objects.filter(
+            user_id=self.request.user.id
+        )
+        if self.request.user.is_superuser:
+            context["object_list"] = Thread.objects.all()
         return context
 
 
-class AddThreadView(CreateView):
+class AddThreadView(SuccessMessageMixin, CreateView):
     """View of adding a thread"""
 
     model = Thread
     success_url = reverse_lazy("thread-list")
     form_class = ThreadForm
-
-    def form_valid(self, form: ThreadForm):
-        messages.success(self.request, "Dodano konwersację!")
-        form.save()
-        return self.render_to_response(self.get_context_data(form=form))
+    success_message = "Dodano konwersację!"
 
 
-class AddMessageView(CreateView):
+
+class AddMessageView(SuccessMessageMixin, CreateView):
     model = Message
     success_url = reverse_lazy("message-list")
     form_class = MessageForm
+    success_message = "Dodano wiadomość!"
 
-    def form_valid(self, form: MessageForm):
-        messages.success(self.request, "Wysłano wiadomość!")
-        return self.render_to_response(self.get_context_data(form=form))
+
+class ThreadDetailView(DetailView):
+    model = Thread
+    context_object_name = "message_list"
+

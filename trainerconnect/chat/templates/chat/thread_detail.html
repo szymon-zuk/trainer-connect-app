@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Wiadomości w konwersacji: {{message.thread}}</h2>
+    {% for message in message_list %}
+    <div class="container">
+        {{ message.username }}: {{ message.text }}
+        <small>created: {{ message.created }}</small>
+    </div>
+{% endblock %}
