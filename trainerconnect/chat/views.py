@@ -1,13 +1,8 @@
-from typing import Any, Dict
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Thread, Message
 from .forms import ThreadForm, MessageForm
-from django.contrib import messages
 
 
 class ThreadListView(LoginRequiredMixin, ListView):
@@ -59,3 +54,16 @@ class ThreadDetailView(LoginRequiredMixin, DetailView):
     model = Thread
     context_object_name = "message_list"
 
+
+class DeleteMessageView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    """Deleting message from db"""
+    model = Message
+    success_message = "Usunięto wiadomość"
+    success_url = reverse_lazy("thread-list")
+
+
+class DeleteThreadView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    """Deleting a single thread from db"""
+    model = Thread
+    success_message = "Usunięto konwersację"
+    success_url = reverse_lazy("thread-list")
