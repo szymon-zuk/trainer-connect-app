@@ -10,7 +10,7 @@ from .forms import ThreadForm, MessageForm
 from django.contrib import messages
 
 
-class ThreadListView(ListView):
+class ThreadListView(LoginRequiredMixin, ListView):
     """List view of all threads - trainee only sees one, and trainer sees all of them"""
 
     model = Thread
@@ -36,7 +36,7 @@ class ThreadListView(ListView):
         return context
 
 
-class AddThreadView(SuccessMessageMixin, CreateView):
+class AddThreadView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """View of adding a thread"""
 
     model = Thread
@@ -46,14 +46,16 @@ class AddThreadView(SuccessMessageMixin, CreateView):
 
 
 
-class AddMessageView(SuccessMessageMixin, CreateView):
+class AddMessageView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """View of adding a message"""
     model = Message
     success_url = reverse_lazy("message-list")
     form_class = MessageForm
     success_message = "Dodano wiadomość!"
 
 
-class ThreadDetailView(DetailView):
+class ThreadDetailView(LoginRequiredMixin, DetailView):
+    """Single thread view which displays all the messages in a thread"""
     model = Thread
     context_object_name = "message_list"
 
