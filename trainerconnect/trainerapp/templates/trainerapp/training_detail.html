@@ -13,10 +13,34 @@
     <tr>
       <th scope="row">{{ object.name }}</th>
       <td>{{ object.description }}</td>
-        <td>{% for exercise in object.exercises.all %}
-            <li><a href="/exercise_details/{{ exercise.id }}">{{ exercise.name }}</a></li>
-        {% endfor %}</td>
-        <td><a class="btn btn-primary" href="/update_training/{{ object.id }}" role="button">Aktualizuj</a></td>
+{#        <td>{% for exercise in object.exercises.all %}#}
+{#            <li><a href="/exercise_details/{{ exercise.id }}">{{ exercise.name }}</a></li>#}
+{#        {% endfor %}</td>#}
+        <td>
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Ilość serii</th>
+      <th scope="col">Ilość powtórzeń</th>
+        <th scope="col">Ciężar</th>
+        <th scope="col">Komentarz</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for exercise in object.exercises.all %}
+    <tr>
+      <th scope="row">{{ exercise.name }}</th>
+      <td>{{ exercise.sets }}</td>
+      <td>{{ exercise.reps }}</td>
+      <td>{{ exercise.load }}</td>
+      <td>{{ exercise.comment }}</td>
+        <td><a class="btn btn-primary" href="/update_exercise/{{ exercise.id }}" role="button">Aktualizuj ćwiczenie</a></td>
+  {% endfor %}
+  </tbody>
+</table>
+        </td>
+        <td><a class="btn btn-primary" href="/update_training/{{ object.id }}" role="button">Aktualizuj trening</a></td>
     </tr>
   </tbody>
 </table>

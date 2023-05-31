@@ -22,7 +22,6 @@
             {% for object in object_list %}
           <tr>
             <td><a href="/update_training_plan/{{ object.id }}">{{ object.name }}</a></td>
-
             <td>
                 {% for training in object.trainings.all %}
                     <li><a href="/training_details/{{ training.id }}">{{ training.name }}</a></li>
