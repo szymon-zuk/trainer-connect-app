@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Wiadomości w konwersacji: {{message.thread}}</h2>
+<h2>Wiadomości w konwersacji: {{thread.name}}</h2>
+    <a href="{% url 'add-message' %}">
+    <button type="button" class="btn btn-primary">Dodaj wiadomość:</button>
+</a>
     {% for message in message_list %}
     <div class="container">
         {{ message.username }}: {{ message.text }}
         <small>created: {{ message.created }}</small>
     </div>
+    {% endfor %}
 {% endblock %}

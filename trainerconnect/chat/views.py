@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -23,11 +24,12 @@ class ThreadListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["search_query"] = self.request.GET.get("search", "")
-        context["object_list"] = Thread.objects.filter(
-            user_id=self.request.user.id
+        context["thread_list"] = Thread.objects.filter(
+            trainee_id=self.request.user.id
         )
         if self.request.user.is_superuser:
-            context["object_list"] = Thread.objects.all()
+            context["thread_list"] = Thread.objects.all()
+        context['message_list'] = Message.objects.all()
         return context
 
 
@@ -40,19 +42,24 @@ class AddThreadView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = "Dodano konwersację!"
 
 
-
 class AddMessageView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """View of adding a message"""
     model = Message
-    success_url = reverse_lazy("message-list")
     form_class = MessageForm
     success_message = "Dodano wiadomość!"
+
+    def get_success_url(self):
+        return reverse_lazy('thread-list')
 
 
 class ThreadDetailView(LoginRequiredMixin, DetailView):
     """Single thread view which displays all the messages in a thread"""
     model = Thread
-    context_object_name = "message_list"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message_list'] = Message.objects.filter(thread_id=self.kwargs['pk'])
+        return context
 
 
 class DeleteMessageView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):

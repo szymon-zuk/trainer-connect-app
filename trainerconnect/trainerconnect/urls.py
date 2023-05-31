@@ -34,9 +34,8 @@ from trainerapp.views import (
     TrainingDetailView,
     TrainingPlanDetailView,
 )
-from calendar_schedule.views import get_events
 from users.views import AppLoginView, AppLogoutView, RegisterView
-from chat.views import ThreadListView, AddThreadView, AddMessageView, DeleteThreadView, DeleteMessageView
+from chat.views import ThreadListView, AddThreadView, AddMessageView, DeleteThreadView, DeleteMessageView, ThreadDetailView
 from django.contrib.auth import views as auth_views
 from django.urls import path
 

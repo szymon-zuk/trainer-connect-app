@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "chat",
+    "calendar_schedule"
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 

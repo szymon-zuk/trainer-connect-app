@@ -12,21 +12,25 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">Numer</th>
         <th scope="col">Nazwa</th>
         <th scope="col">Trener</th>
         <th scope="col">Podopieczny</th>
         <th scope"col">Opis</th>
+        <th scope="col">Wiadomości</th>
       </tr>
     </thead>
     <tbody>
         {% for thread in thread_list %}
       <tr>
-        <th scope="row">{{ thread.id }}</th>
-        <td>{{ thread.name }}</td>
+        <td><a href="/thread/{{ thread.id }}">{{ thread.name }}</a></td>
         <td>{{ thread.trainer_id }}</td>
         <td>{{ thread.trainee_id }}</td>
         <td>{{ thread.description }}</td>
+        <td>
+            {% for message in message_list %}
+                <li>{{ message.text }}</li>
+            {% endfor %}
+        </td>
       </tr>
         {% empty %}
         <tr>
