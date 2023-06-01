@@ -145,7 +145,6 @@ class TrainingPlanListView(LoginRequiredMixin, ListView):
     """List view of all training plans"""
 
     model = TrainingPlan
-    context_object_name = "training_plan_list"
     template_name = "trainingplan_list.html"
 
     def get_queryset(self):
