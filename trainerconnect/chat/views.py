@@ -10,7 +10,6 @@ class ThreadListView(LoginRequiredMixin, ListView):
     """List view of all threads - trainee only sees one, and trainer sees all of them"""
 
     model = Thread
-    paginate_by = 20
     context_object_name = "thread_list"
     template_name = "thread_list.html"
 
@@ -23,13 +22,9 @@ class ThreadListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_query"] = self.request.GET.get("search", "")
-        context["thread_list"] = Thread.objects.filter(
-            trainee_id=self.request.user.id
-        )
+        context["thread_list"] = Thread.objects.filter(trainee_id=self.request.user.id)
         if self.request.user.is_superuser:
             context["thread_list"] = Thread.objects.all()
-        context['message_list'] = Message.objects.all()
         return context
 
 
@@ -44,26 +39,29 @@ class AddThreadView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class AddMessageView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """View of adding a message"""
+
     model = Message
     form_class = MessageForm
     success_message = "Dodano wiadomość!"
 
     def get_success_url(self):
-        return reverse_lazy('thread-list')
+        return reverse_lazy("thread-list")
 
 
 class ThreadDetailView(LoginRequiredMixin, DetailView):
     """Single thread view which displays all the messages in a thread"""
+
     model = Thread
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['message_list'] = Message.objects.filter(thread_id=self.kwargs['pk'])
+        context["message_list"] = Message.objects.filter(thread_id=self.kwargs["pk"])
         return context
 
 
 class DeleteMessageView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     """Deleting message from db"""
+
     model = Message
     success_message = "Usunięto wiadomość"
     success_url = reverse_lazy("thread-list")
@@ -71,6 +69,7 @@ class DeleteMessageView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
 
 class DeleteThreadView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     """Deleting a single thread from db"""
+
     model = Thread
     success_message = "Usunięto konwersację"
     success_url = reverse_lazy("thread-list")

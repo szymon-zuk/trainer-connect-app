@@ -9,7 +9,6 @@ from .forms import RegisterForm
 
 
 class AppLoginView(LoginView):
-    redirect_authenticated_user = True
     template_name = "registrations/login.html"
 
     def get_success_url(self) -> str:

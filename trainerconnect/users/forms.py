@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
-# Sign Up Form
 class RegisterForm(UserCreationForm):
+    """Form to register a new user"""
+
     class Meta:
         model = User
         fields = [

@@ -35,7 +35,14 @@ from trainerapp.views import (
     TrainingPlanDetailView,
 )
 from users.views import AppLoginView, AppLogoutView, RegisterView
-from chat.views import ThreadListView, AddThreadView, AddMessageView, DeleteThreadView, DeleteMessageView, ThreadDetailView
+from chat.views import (
+    ThreadListView,
+    AddThreadView,
+    AddMessageView,
+    DeleteThreadView,
+    DeleteMessageView,
+    ThreadDetailView,
+)
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
@@ -109,7 +116,8 @@ urlpatterns = [
     path(
         "change_password/",
         auth_views.PasswordChangeView.as_view(
-            template_name="registrations/change_password.html", success_url="/"
+            template_name="registrations/change_password.html",
+            success_url="/",
         ),
         name="change_password",
     ),
@@ -147,5 +155,7 @@ urlpatterns = [
     path("add_message/", AddMessageView.as_view(), name="add-message"),
     path("thread/<int:pk>/", ThreadDetailView.as_view(), name="thread"),
     path("delete_thread/<int:pk>/", DeleteThreadView.as_view(), name="delete-thread"),
-    path("delete_message/<int:pk>/", DeleteMessageView.as_view(), name="delete-message"),
+    path(
+        "delete_message/<int:pk>/", DeleteMessageView.as_view(), name="delete-message"
+    ),
 ]

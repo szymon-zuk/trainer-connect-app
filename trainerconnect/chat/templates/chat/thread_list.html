@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Lista konwersacji:</h2>
-<form method="get" action="{% url "thread-list" %}">
-    <input type="text" name="search" value="{{ search_query }}">
-    <button type="submit">Szukaj</button>
+<h2 class="d-flex justify-content-center">Lista konwersacji</h2>
+
 </form>
-<a href="/add_thread/">
-    <button type="button" class="btn btn-primary">Dodaj konwersację:</button>
+<a href="/add_thread/" class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary">Dodaj konwersację</button>
 </a><br><br>
 <ul>
 <table class="table">
@@ -16,7 +14,7 @@
         <th scope="col">Trener</th>
         <th scope="col">Podopieczny</th>
         <th scope"col">Opis</th>
-        <th scope="col">Wiadomości</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -27,9 +25,9 @@
         <td>{{ thread.trainee_id }}</td>
         <td>{{ thread.description }}</td>
         <td>
-            {% for message in message_list %}
-                <li>{{ message.text }}</li>
-            {% endfor %}
+            <a href="/add_message/">
+    <button type="button" class="btn btn-primary">Dodaj wiadomość</button>
+            </a>
         </td>
       </tr>
         {% empty %}

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Lista treningów:</h2>
-    <form method="get" action="{% url "training-list" %}">
+    <h2 class="d-flex justify-content-center">Lista treningów:</h2>
+    <form class="d-flex justify-content-center" method="get" action="{% url "training-list" %}">
         <input type="text" name="search" value="{{ search_query }}">
         <button type="submit">Szukaj</button>
     </form><br>
-    <a href="/add_training/">
+    <a href="/add_training/" class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary">Dodaj trening</button>
     </a><br><br>
     <ul>
