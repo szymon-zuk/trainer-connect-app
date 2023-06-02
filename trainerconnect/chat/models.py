@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 
 
 class Thread(models.Model):
@@ -7,13 +8,10 @@ class Thread(models.Model):
 
     name = models.CharField(max_length=64)
     trainer_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        default="szymon",
-        related_name="trainer_id",
+        User, on_delete=models.CASCADE, related_name="trainer_id"
     )
     trainee_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="trainee_id"
+        User, on_delete=models.CASCADE, related_name="trainee_id"
     )
     description = models.CharField(max_length=64)
 

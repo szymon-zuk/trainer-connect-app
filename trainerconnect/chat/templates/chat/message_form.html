@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-    <h3>Dodaj wiadomość:</h3>
+    <h3 class="d-flex justify-content-center">Dodaj wiadomość:</h3>
+    <div class="d-flex justify-content-center">
     <form action="{% url 'add-message' %}" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Wyślij">
+        {{ form|crispy }}
+    <button type="submit" class="btn btn-primary" value="">Dodaj</button>
+    </form>
     </form>
 {% endblock %}
