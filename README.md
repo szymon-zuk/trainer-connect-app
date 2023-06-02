@@ -1,4 +1,4 @@
-# trainer-connect-app
+# TrainerConnect.
 An app designed for personal trainers and their trainees. It implements a functionality of adding exercises, trainings and training plans for specific users. It also has a message board for users and their trainer.
 
 
