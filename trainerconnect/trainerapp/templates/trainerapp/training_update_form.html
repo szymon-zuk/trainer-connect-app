@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h3>Edytuj trening:</h3>
+    <h3 class="d-flex justify-content-center">Edytuj trening</h3>
+    <div class="d-flex justify-content-center">
     <form method="POST">
     {% csrf_token %}
-    {{ form|crispy }}
+        {{ form|crispy }}
     <button type="submit" class="btn btn-primary" value="">Aktualizuj</button>
     </form>
 {% endblock %}

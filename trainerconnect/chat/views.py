@@ -47,6 +47,12 @@ class AddMessageView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy("thread-list")
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.username = self.request.user
+        instance.save()
+        return super().form_valid(form)
+
 
 class ThreadDetailView(LoginRequiredMixin, DetailView):
     """Single thread view which displays all the messages in a thread"""

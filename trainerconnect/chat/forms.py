@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
-
 from .models import Thread, Message
+from django.contrib.auth.models import User
 
 
 class ThreadForm(forms.ModelForm):
@@ -29,9 +29,8 @@ class MessageForm(forms.ModelForm):
 
     class Meta:
         model = Message
-        exclude = ["created"]
+        exclude = ["created", "username"]
         labels = {
-            "username": "Użytkownik",
             "text": "Treść",
             "thread": "Konwersacja",
         }

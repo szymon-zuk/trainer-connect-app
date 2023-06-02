@@ -136,7 +136,7 @@ class AddTrainingPlanView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """Implements a form that adds a training plan to database"""
 
     model = TrainingPlan
-    success_url = reverse_lazy("main-page")
+    success_url = reverse_lazy("training-plan-list")
     form_class = TrainingPlanForm
     success_message = "Dodano plan treningowy!"
 
