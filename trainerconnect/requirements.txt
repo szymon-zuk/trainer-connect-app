@@ -43,3 +43,4 @@ six==1.16.0
 sqlparse==0.4.4
 uritemplate==3.0.1
 urllib3==1.26.16
+psycopg2-binary==2.9.6
