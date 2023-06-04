@@ -1,4 +1,7 @@
 # TrainerConnect.
+
+![status badge](https://github.com/szymon-zuk/trainer-connect-app/actions/workflows/test.yml/badge.svg)
+
 An app designed for personal trainers and their trainees. It implements a functionality of adding exercises, trainings and training plans for specific users. It also has a message board for users and their trainer.
 
 
