@@ -1,5 +1,4 @@
 from .models import Exercise, Training, TrainingPlan
-from django.forms import ModelForm
 from django import forms
 
 
