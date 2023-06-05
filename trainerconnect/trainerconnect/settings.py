@@ -60,16 +60,6 @@ LOGOUT_REDIRECT_URL = "/logout/"
 # EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 # EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": config("DB_NAME"),
-#         "HOST": config("DB_HOST"),
-#         "PASSWORD": config("DB_PASSWORD"),
-#         "USER": config("DB_USER"),
-#         "PORT": config("DB_PORT"),
-#     }
-# }
 
 if os.environ.get('GITHUB_WORKFLOW'):
     DATABASES = {
@@ -80,6 +70,17 @@ if os.environ.get('GITHUB_WORKFLOW'):
            'PASSWORD': "postgres",
            'HOST': 'localhost',
            'PORT': 5432,
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config("DB_NAME"),
+            "HOST": config("DB_HOST"),
+            "PASSWORD": config("DB_PASSWORD"),
+            "USER": config("DB_USER"),
+            "PORT": config("DB_PORT"),
         }
     }
 
