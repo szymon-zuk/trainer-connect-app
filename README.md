@@ -18,3 +18,7 @@ Create migrations and migrate:
 To start the app:
 
 `$ python manage.py runserver`
+
+# Preview and database structure
+![training list](trainerconnect/static/training_list.png)
+![database structure](trainerconnect/static/database_structure.png)
