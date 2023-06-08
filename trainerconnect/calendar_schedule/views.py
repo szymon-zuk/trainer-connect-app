@@ -4,7 +4,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import View
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import EventForm
-from apiclient.discovery import build
 from .API import create_event
 
 
