@@ -3,7 +3,12 @@ from google.oauth2 import service_account
 import googleapiclient.discovery
 from datetime import datetime
 
-CAL_ID = config("CAL_ID")
+
+if os.environ.get('GITHUB_WORKFLOW'):
+    CAL_ID = "test cal_id"
+else:
+    CAL_ID = config("CAL_ID")
+
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 SERVICE_ACCOUNT_FILE = "./google-credentials.json"
 
