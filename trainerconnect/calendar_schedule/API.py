@@ -1,6 +1,6 @@
 from decouple import config
 from google.oauth2 import service_account
-import googleapiclient.discovery
+from googleapiclient.discovery import build
 from datetime import datetime
 import os
 
@@ -20,7 +20,7 @@ def create_event(title, start, end, location, event_description):
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES
     )
-    service = googleapiclient.discovery.build("calendar", "v3", credentials=credentials)
+    service = build("calendar", "v3", credentials=credentials)
 
     """Creating a new event"""
 
