@@ -7,19 +7,15 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = [
             "title",
-            "start_time",
-            "end_time",
-            "host_email",
-            "guest_email",
+            "start",
+            "end",
             "location",
             "event_description",
         ]
         labels = {
             "title": "Nazwa",
-            "start_time": "Czas rozpoczęcia",
-            "end_time": "Czas zakończenia",
-            "host_email": "E-mail trenera",
-            "guest_email": "E-mail podopiecznego",
+            "start": "Czas rozpoczęcia",
+            "end": "Czas zakończenia",
             "location": "Lokalizacja",
             "event_description": "Opis spotkania",
         }
