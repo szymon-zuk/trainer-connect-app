@@ -2,7 +2,7 @@ from django import forms
 from calendar_schedule.models import Event
 
 
-class DateInput(forms.DateTimeInput):
+class DateTimeInput(forms.DateTimeInput):
     input_type = 'datetime'
 
 
