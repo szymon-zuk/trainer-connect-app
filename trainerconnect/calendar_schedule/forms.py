@@ -2,7 +2,7 @@ from django import forms
 from calendar_schedule.models import Event
 
 
-class DateInput(forms.DateInput):
+class DateInput(forms.DateTimeInput):
     input_type = 'datetime'
 
 
@@ -25,6 +25,6 @@ class EventForm(forms.ModelForm):
             "event_description": "Opis spotkania",
         }
         widgets = {
-            "start": DateInput(),
-            'end': DateInput()
+            "start": DateTimeInput(),
+            'end': DateTimeInput()
         }

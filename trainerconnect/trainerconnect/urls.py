@@ -43,7 +43,7 @@ from chat.views import (
     DeleteMessageView,
     ThreadDetailView,
 )
-from calendar_schedule.views import CreateEventView, EventListView
+from calendar_schedule.views import CreateEventView, EventListView, UpdateEventView
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
@@ -161,4 +161,5 @@ urlpatterns = [
     ),
     path('create_event/', CreateEventView.as_view(), name='create-event'),
     path('event_list/', EventListView.as_view(), name='event-list'),
+    path('update_event/', UpdateEventView.as_view(), name="update-event"),
 ]
