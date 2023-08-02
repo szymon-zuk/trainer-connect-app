@@ -1,0 +1,11 @@
+version: "3"
+services:
+  uzyjto_app:
+    container_name: TrainerConnect
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    restart: always
+    network_mode: "host"
