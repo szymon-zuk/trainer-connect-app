@@ -1,7 +1,5 @@
-from django.forms import ModelForm
 from django import forms
 from .models import Thread, Message
-from django.contrib.auth.models import User
 
 
 class ThreadForm(forms.ModelForm):

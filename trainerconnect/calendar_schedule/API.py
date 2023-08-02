@@ -1,7 +1,6 @@
 from decouple import config
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-from datetime import datetime
 import os
 
 
@@ -48,7 +47,6 @@ def get_event_id():
         SERVICE_ACCOUNT_FILE, scopes=SCOPES
     )
     service = build("calendar", "v3", credentials=credentials)
-    event_list = service.calendarList().list().execute()
     result = service.events().list(calendarId=CAL_ID).execute()
     table_size = len(result['items'])
     event_id = result['items'][table_size - 1]['id']

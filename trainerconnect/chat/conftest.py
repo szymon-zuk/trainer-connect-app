@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 import pytest
 from django.test import Client
 from .models import Thread, Message
-from django.contrib.auth import get_user_model
 from datetime import datetime
 
 

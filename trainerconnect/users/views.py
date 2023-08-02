@@ -1,5 +1,4 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
 from django.urls import reverse_lazy

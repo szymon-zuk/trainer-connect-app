@@ -1,7 +1,5 @@
-from django.test import Client
 from .models import Message, Thread
 from django.urls import reverse
-from datetime import datetime
 import pytest
 
 
