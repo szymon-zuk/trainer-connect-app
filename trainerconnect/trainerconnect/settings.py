@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY", default="django_insecure")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -61,15 +61,15 @@ LOGOUT_REDIRECT_URL = "/logout/"
 # EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 
-if os.environ.get('GITHUB_WORKFLOW'):
+if os.environ.get("GITHUB_WORKFLOW"):
     DATABASES = {
-        'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': 'github_actions',
-           'USER': "postgres",
-           'PASSWORD': "postgres",
-           'HOST': 'localhost',
-           'PORT': 5432,
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "github_actions",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "localhost",
+            "PORT": 5432,
         }
     }
 else:
