@@ -19,6 +19,17 @@ To start the app:
 
 `$ python manage.py runserver`
 
+---
+# Docker
+To run the app in a container for the first time execute:
+`$ docker-compose up --build -d`
+
+If there were no changes next time you can use:
+`$ docker-compose up -d` - where -d parameter is for the detached mode (in the background)
+
+To stop the container run:
+`$ docker-compose down`
+
 # Preview and database structure
 ![training list](trainerconnect/static/training_list.png)
 ![database structure](trainerconnect/static/database_structure.png)
