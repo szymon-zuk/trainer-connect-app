@@ -1,6 +1,7 @@
 name: Lint and test
 
 on:
+  workflow_dispatch:
   push:
     branches:
     - main
@@ -32,6 +33,7 @@ jobs:
       - run: | 
           pip install -r requirements.txt
           pip install flake8
+          pip install psycopg2-binary
           flake8 . --max-line-length=127
           cd trainerconnect
           pytest .
