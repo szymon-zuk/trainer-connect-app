@@ -31,6 +31,6 @@ jobs:
         with:
           python-version: 3.8
       - run: pip install -r requirements.txt flake8 pytest-django psycopg2-binary
-      - run: flake8 . --max-line-length=127 --disable-warnings
+      - run: flake8 . --max-line-length=127
       - run: pytest .
         working-directory: trainerconnect
