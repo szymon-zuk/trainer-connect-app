@@ -3,13 +3,12 @@ name: Lint and test
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   lint-and-test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,14 +24,13 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         ports:
           - 5432:5432
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: pip install pytest-django
-      - run: | 
-          pip install -r requirements.txt
-          pip install flake8
-          flake8 . --max-line-length=127
-          cd trainerconnect
-          pytest .
-
+        with:
+          python-version: 3.8
+      - run: pip install -r requirements.txt flake8 pytest-django psycopg2-binary
+      - run: flake8 . --max-line-length=127
+      - run: pytest .
+        working-directory: trainerconnect
